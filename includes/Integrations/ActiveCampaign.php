@@ -397,8 +397,9 @@ class Integration_ActiveCampaign extends Integration {
 					$this->active_tags = [];
 					return $this->get_tag_id( $tag, $create_missing_tag, false );
 				}
-
-				$this->log( esc_html__( 'Unexpected response when attempting to create a tag', 'automatewoo' ) );
+				// phpcs:disable WordPress.PHP.DevelopmentFunctions
+				$this->log( 'Unexpected response when attempting to create a tag. Response: ' . print_r( $response, true ) . 'Tags: ' . print_r( $this->active_tags, true ) );
+				// phpcs:enable
 				return false;
 			}
 

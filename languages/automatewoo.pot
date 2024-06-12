@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: AutomateWoo 6.0.24\n"
+"Project-Id-Version: AutomateWoo 6.0.25\n"
 "Report-Msgid-Bugs-To: https://woo.com/my-account/contact-support/\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-21T10:40:42+00:00\n"
+"POT-Creation-Date: 2024-06-11T22:04:09+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: automatewoo\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: admin/admin.php:149
 #: admin/admin.php:161
 #: admin/admin.php:825
-#: admin/coupons-list.php:30
+#: admin/coupons-list.php:42
 #: admin/WCAdminConnectPages.php:74
 #: automatewoo.php:131
 #: includes/Actions/Change_Workflow_Status.php:18
@@ -667,12 +667,12 @@ msgstr ""
 
 #: admin/data-layer-formatter.php:34
 #: admin/reports/conversions-list.php:139
-#: includes/Actions/Order_Add_Note.php:19
-#: includes/Actions/Order_Change_Status.php:19
-#: includes/Actions/Order_Resend_Email.php:19
-#: includes/Actions/Order_Trigger_Action.php:21
-#: includes/Actions/Order_Update_Customer_Shipping_Note.php:18
-#: includes/Actions/Order_Update_Meta.php:18
+#: includes/Actions/Order_Add_Note.php:27
+#: includes/Actions/Order_Change_Status.php:30
+#: includes/Actions/Order_Resend_Email.php:30
+#: includes/Actions/Order_Trigger_Action.php:31
+#: includes/Actions/Order_Update_Customer_Shipping_Note.php:28
+#: includes/Actions/Order_Update_Meta.php:28
 #: includes/DataTypes/Order.php:68
 #: includes/Privacy_Exporters.php:330
 msgid "Order"
@@ -684,10 +684,10 @@ msgstr ""
 #: admin/reports/logs.php:110
 #: admin/reports/opt-ins.php:71
 #: admin/reports/queue.php:135
-#: includes/Actions/Customer_Add_Tags.php:18
-#: includes/Actions/Customer_Change_Role.php:18
+#: includes/Actions/Customer_Add_Tags.php:26
+#: includes/Actions/Customer_Change_Role.php:28
 #: includes/Actions/Customer_Update_Meta.php:18
-#: includes/Actions/Order_Resend_Email.php:48
+#: includes/Actions/Order_Resend_Email.php:62
 #: includes/Actions/Points_Rewards_Edit_Points_Abstract.php:30
 #: includes/DataTypes/Customer.php:83
 #: admin/assets/build/analytics.js:3
@@ -730,10 +730,10 @@ msgstr ""
 #: includes/Actions/Subscriptions/RecalculateTaxes.php:34
 #: includes/Actions/Subscriptions/RegenerateDownloadPermissions.php:32
 #: includes/Actions/Subscription_Add_Note.php:29
-#: includes/Actions/Subscription_Change_Status.php:19
-#: includes/Actions/Subscription_Send_Invoice.php:20
-#: includes/Actions/Subscription_Update_Meta.php:19
-#: includes/DataTypes/Subscription.php:65
+#: includes/Actions/Subscription_Change_Status.php:26
+#: includes/Actions/Subscription_Send_Invoice.php:27
+#: includes/Actions/Subscription_Update_Meta.php:24
+#: includes/DataTypes/Subscription.php:66
 #: includes/Privacy_Exporters.php:362
 msgid "Subscription"
 msgstr ""
@@ -775,16 +775,17 @@ msgid "%1$s &ndash; %2$s"
 msgstr ""
 
 #: admin/json-search.php:172
-#: admin/list-table.php:98
+#: admin/list-table.php:88
 #: includes/Format.php:299
 msgid "[Guest]"
 msgstr ""
 
-#: admin/list-table.php:47
+#: admin/list-table.php:48
 msgid "Search"
 msgstr ""
 
-#: admin/list-table.php:82
+#. translators: 1: User First name, 2: User Last name
+#: admin/list-table.php:73
 #: includes/Customer.php:362
 #: includes/Data_Layer.php:440
 #: includes/Guest.php:200
@@ -793,16 +794,16 @@ msgctxt "full name"
 msgid "%1$s %2$s"
 msgstr ""
 
-#: admin/list-table.php:169
+#: admin/list-table.php:164
 msgid "Filter"
 msgstr ""
 
-#: admin/list-table.php:232
+#: admin/list-table.php:241
 #: admin/reports/abstract-graph.php:89
 msgid "Search for a workflow&hellip;"
 msgstr ""
 
-#: admin/list-table.php:260
+#: admin/list-table.php:272
 msgid "Search for a customer&hellip;"
 msgstr ""
 
@@ -889,7 +890,7 @@ msgstr ""
 #: admin/reports/logs.php:168
 #: admin/reports/queue.php:195
 #: admin/views/action.php:32
-#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:28
+#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:36
 msgid "Delete"
 msgstr ""
 
@@ -1026,7 +1027,7 @@ msgstr ""
 
 #: admin/reports/guests.php:42
 #: admin/views/page-guest-details.php:44
-#: includes/Actions/Order_Resend_Email.php:57
+#: includes/Actions/Order_Resend_Email.php:72
 #: includes/Actions/Send_Email_Abstract.php:34
 #: includes/Fields/EmailAddressWithName.php:48
 msgid "Email"
@@ -1183,7 +1184,7 @@ msgid "Shorten all SMS links"
 msgstr ""
 
 #: admin/settings-tabs/campaign-monitor.php:19
-#: includes/Actions/Campaign_Monitor_Abstract.php:14
+#: includes/Actions/Campaign_Monitor_Abstract.php:20
 msgid "Campaign Monitor"
 msgstr ""
 
@@ -1665,7 +1666,7 @@ msgid "Move to Trash"
 msgstr ""
 
 #: admin/views/meta-box-save.php:117
-#: admin/workflow-list.php:92
+#: admin/workflow-list.php:96
 msgid "Run"
 msgstr ""
 
@@ -1721,7 +1722,7 @@ msgstr ""
 
 #: admin/views/meta-box-timing.php:111
 #: admin/workflow-edit.php:276
-#: admin/workflow-list.php:43
+#: admin/workflow-list.php:45
 msgid "Timing"
 msgstr ""
 
@@ -2058,25 +2059,26 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: admin/workflow-list.php:44
+#: admin/workflow-list.php:46
 msgid "Run Count"
 msgstr ""
 
-#: admin/workflow-list.php:45
+#: admin/workflow-list.php:47
 msgid "Queue Count"
 msgstr ""
 
-#: admin/workflow-list.php:100
+#: admin/workflow-list.php:104
 msgid "Toggle Status"
 msgstr ""
 
-#: admin/workflow-list.php:117
+#. translators: %s: the count of published workflows
+#: admin/workflow-list.php:121
 msgid "Active <span class=\"count\">(%s)</span>"
 msgid_plural "Active <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/workflow-list.php:212
+#: admin/workflow-list.php:221
 #: includes/Triggers/AbstractManual.php:21
 #: includes/Workflows.php:48
 msgid "Manual"
@@ -2125,7 +2127,7 @@ msgid "Contact email"
 msgstr ""
 
 #: includes/Actions/Active_Campaign_Abstract.php:36
-#: includes/Actions/Campaign_Monitor_Abstract.php:25
+#: includes/Actions/Campaign_Monitor_Abstract.php:31
 msgid "You can use variables such as {{ customer.email }} here."
 msgstr ""
 
@@ -2222,7 +2224,7 @@ msgstr ""
 
 #: includes/Actions/Active_Campaign_Update_Contact_Field.php:43
 #: includes/Actions/Customer_Update_Meta.php:33
-#: includes/Actions/Order_Update_Meta.php:32
+#: includes/Actions/Order_Update_Meta.php:44
 #: includes/Actions/Update_Product_Meta.php:32
 msgid "Value"
 msgstr ""
@@ -2255,45 +2257,45 @@ msgstr ""
 msgid "List name"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Abstract.php:24
+#: includes/Actions/Campaign_Monitor_Abstract.php:30
 msgid "Subscriber email"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Abstract.php:38
+#: includes/Actions/Campaign_Monitor_Abstract.php:44
 msgid "Subscriber name"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Abstract.php:50
+#: includes/Actions/Campaign_Monitor_Abstract.php:56
 #: includes/Traits/MailServiceAction.php:27
 msgid "List"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Abstract.php:63
+#: includes/Actions/Campaign_Monitor_Abstract.php:69
 #: includes/Subscription_Workflow_Helper.php:235
 msgid "Resubscribe"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Abstract.php:64
+#: includes/Actions/Campaign_Monitor_Abstract.php:70
 msgid "If checked the user will be subscribed even if they have already unsubscribed from one of your lists. Use with caution."
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Add_Subscriber.php:15
+#: includes/Actions/Campaign_Monitor_Add_Subscriber.php:20
 msgid "Add Subscriber to List"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:15
+#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:20
 msgid "Remove Subscriber From List"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:23
+#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:30
 msgid "Type"
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:25
+#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:32
 msgid "If delete is selected the subscriber's email will not be added to the suppression list."
 msgstr ""
 
-#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:27
+#: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:35
 #: includes/Workflow_Email.php:310
 msgid "Unsubscribe"
 msgstr ""
@@ -2322,29 +2324,29 @@ msgstr ""
 msgid "Customer email"
 msgstr ""
 
-#: includes/Actions/Customer_Add_Tags.php:17
+#: includes/Actions/Customer_Add_Tags.php:25
 msgid "Add Tags"
 msgstr ""
 
-#: includes/Actions/Customer_Add_Tags.php:19
+#: includes/Actions/Customer_Add_Tags.php:27
 msgid "Please note that tags are not supported on guest customers."
 msgstr ""
 
-#: includes/Actions/Customer_Change_Role.php:17
+#: includes/Actions/Customer_Change_Role.php:27
 msgid "Change Role"
 msgstr ""
 
-#: includes/Actions/Customer_Change_Role.php:19
+#: includes/Actions/Customer_Change_Role.php:29
 msgid "Please note that if the customer is a guest this action will do nothing."
 msgstr ""
 
-#: includes/Actions/Customer_Remove_Tags.php:15
+#: includes/Actions/Customer_Remove_Tags.php:19
 msgid "Remove Tags"
 msgstr ""
 
 #: includes/Actions/Customer_Update_Meta.php:17
-#: includes/Actions/Order_Update_Meta.php:17
-#: includes/Actions/Subscription_Update_Meta.php:18
+#: includes/Actions/Order_Update_Meta.php:27
+#: includes/Actions/Subscription_Update_Meta.php:23
 #: includes/Actions/Update_Product_Meta.php:17
 msgid "Update Custom Field"
 msgstr ""
@@ -2354,7 +2356,7 @@ msgid "This action can add or update a customer's custom field. If the customer 
 msgstr ""
 
 #: includes/Actions/Customer_Update_Meta.php:27
-#: includes/Actions/Order_Update_Meta.php:26
+#: includes/Actions/Order_Update_Meta.php:38
 #: includes/Actions/Update_Product_Meta.php:26
 msgid "Key"
 msgstr ""
@@ -2479,6 +2481,7 @@ msgid "Existing plan"
 msgstr ""
 
 #: includes/Actions/Memberships_Change_Plan.php:32
+#: includes/Actions/Memberships_Change_Status.php:47
 msgid "[None]"
 msgstr ""
 
@@ -2514,6 +2517,48 @@ msgstr ""
 msgid "Membership plan changed from %s to %s by AutomateWoo workflow:#%s"
 msgstr ""
 
+#: includes/Actions/Memberships_Change_Status.php:24
+msgid "Update the status of a user's current membership plan"
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:25
+msgid "Changes the status of a users membership. The action will only run if a membership already exists for the user."
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:40
+msgid "Membership Plan"
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:46
+msgid "Current Status"
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:48
+msgid "Leave this blank to set the new status regardless of the existing status."
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:53
+msgid "New Status"
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:58
+#: includes/Actions/Order_Add_Note.php:48
+#: includes/Actions/Order_Update_Customer_Shipping_Note.php:39
+msgid "Note"
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:80
+msgid "No change made to membership because the current status is the same as the new status."
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:87
+msgid "Could not find an active membership for the customer."
+msgstr ""
+
+#: includes/Actions/Memberships_Change_Status.php:92
+msgid "Membership status doesn't match value specified in Action settings."
+msgstr ""
+
 #: includes/Actions/Memberships_Delete_User_Membership.php:19
 msgid "Delete Membership For User"
 msgstr ""
@@ -2534,34 +2579,30 @@ msgstr ""
 msgid "Failed deleting membership #%s"
 msgstr ""
 
-#: includes/Actions/Order_Add_Note.php:18
+#: includes/Actions/Order_Add_Note.php:26
 #: includes/Actions/Subscription_Add_Note.php:28
 msgid "Add Note"
 msgstr ""
 
-#: includes/Actions/Order_Add_Note.php:29
+#: includes/Actions/Order_Add_Note.php:39
 msgid "Note author"
 msgstr ""
 
-#: includes/Actions/Order_Add_Note.php:32
+#: includes/Actions/Order_Add_Note.php:42
 msgid "Author of the Note. If not set, will default to 'WooCommerce'"
 msgstr ""
 
-#: includes/Actions/Order_Add_Note.php:38
-#: includes/Actions/Order_Update_Customer_Shipping_Note.php:29
-msgid "Note"
-msgstr ""
-
-#: includes/Actions/Order_Change_Status.php:18
-#: includes/Actions/Subscription_Change_Status.php:18
+#: includes/Actions/Order_Change_Status.php:29
+#: includes/Actions/Subscription_Change_Status.php:25
 msgid "Change Status"
 msgstr ""
 
-#: includes/Actions/Order_Change_Status.php:25
+#: includes/Actions/Order_Change_Status.php:38
 msgid "Order status will be changed to this."
 msgstr ""
 
-#: includes/Actions/Order_Change_Status.php:40
+#. translators: The workflow ID
+#: includes/Actions/Order_Change_Status.php:58
 msgid "AutomateWoo workflow #%s."
 msgstr ""
 
@@ -2573,51 +2614,52 @@ msgstr ""
 msgid "This action can add or update an order item's custom field."
 msgstr ""
 
-#: includes/Actions/Order_Resend_Email.php:18
+#: includes/Actions/Order_Resend_Email.php:29
 msgid "Resend Order Email"
 msgstr ""
 
-#: includes/Actions/Order_Resend_Email.php:20
+#: includes/Actions/Order_Resend_Email.php:31
 msgid "Please note that email tracking is not currently supported on this action."
 msgstr ""
 
-#: includes/Actions/Order_Resend_Email.php:45
+#: includes/Actions/Order_Resend_Email.php:60
 msgid "Admin"
 msgstr ""
 
-#: includes/Actions/Order_Resend_Email.php:96
-msgid "%s email notification sent by AutomateWoo workflow #%d"
-msgstr ""
-
-#: includes/Actions/Order_Trigger_Action.php:20
-msgid "Trigger Order Action"
-msgstr ""
-
-#: includes/Actions/Order_Trigger_Action.php:22
-msgid "Not to be confused with AutomateWoo actions this action can trigger a WooCommerce order action. They can normally be found in the in the top right of of the order edit view."
+#. translators: %1$s Mail title, %2$d The Workflow ID
+#: includes/Actions/Order_Resend_Email.php:117
+msgid "%1$s email notification sent by AutomateWoo workflow #%2$d"
 msgstr ""
 
 #: includes/Actions/Order_Trigger_Action.php:30
+msgid "Trigger Order Action"
+msgstr ""
+
+#: includes/Actions/Order_Trigger_Action.php:32
+msgid "Not to be confused with AutomateWoo actions this action can trigger a WooCommerce order action. They can normally be found in the in the top right of of the order edit view."
+msgstr ""
+
+#: includes/Actions/Order_Trigger_Action.php:42
 msgid "Order action"
 msgstr ""
 
-#: includes/Actions/Order_Trigger_Action.php:60
+#: includes/Actions/Order_Trigger_Action.php:72
 msgid "Generate download permissions"
 msgstr ""
 
-#: includes/Actions/Order_Update_Customer_Shipping_Note.php:17
+#: includes/Actions/Order_Update_Customer_Shipping_Note.php:27
 msgid "Update Customer Provided Note"
 msgstr ""
 
-#: includes/Actions/Order_Update_Customer_Shipping_Note.php:35
+#: includes/Actions/Order_Update_Customer_Shipping_Note.php:45
 msgid "Append to existing note?"
 msgstr ""
 
-#: includes/Actions/Order_Update_Customer_Shipping_Note.php:36
+#: includes/Actions/Order_Update_Customer_Shipping_Note.php:46
 msgid "If checked and there is an existing customer shipping note for this order the note on this action will added to the field after a pipe (|). If unchecked any existing note will be replaced."
 msgstr ""
 
-#: includes/Actions/Order_Update_Meta.php:19
+#: includes/Actions/Order_Update_Meta.php:29
 msgid "This action can add or update an order's custom field."
 msgstr ""
 
@@ -3039,22 +3081,17 @@ msgstr ""
 msgid "%1$s workflow run: updated trial end date to %2$s.  (Workflow ID: %3$d)"
 msgstr ""
 
-#: includes/Actions/Subscription_Add_Coupon.php:23
+#: includes/Actions/Subscription_Add_Coupon.php:30
 msgid "Add Coupon"
 msgstr ""
 
-#: includes/Actions/Subscription_Add_Coupon.php:24
+#: includes/Actions/Subscription_Add_Coupon.php:31
 msgid "Add a coupon to discount future payments for a subscription. The coupon will be added using the discount amount set on the coupon. This action can be used for bulk editing subscriptions, or to change the coupons provided to a subscriber at different stages of their subscription's lifecycle. The same coupon code will only be added once to a subscription. Only recurring coupon types can be added."
 msgstr ""
 
 #. translators: %1$s: workflow title, %2$s coupon code, %3$d workflow ID
-#: includes/Actions/Subscription_Add_Coupon.php:59
+#: includes/Actions/Subscription_Add_Coupon.php:66
 msgid "%1$s workflow run: added coupon %2$s to subscription. (Workflow ID: %3$d)"
-msgstr ""
-
-#: includes/Actions/Subscription_Add_Coupon.php:69
-#: includes/Actions/Subscription_Edit_Coupon_Abstract.php:49
-msgid "Coupon"
 msgstr ""
 
 #: includes/Actions/Subscription_Add_Product.php:48
@@ -3070,8 +3107,13 @@ msgstr ""
 msgid "%1$s workflow run: added %2$s to subscription. (Product ID: %3$d; Workflow ID: %4$d)"
 msgstr ""
 
-#: includes/Actions/Subscription_Change_Status.php:42
+#. translators: The Workflow ID
+#: includes/Actions/Subscription_Change_Status.php:57
 msgid "Subscription status changed by AutomateWoo Workflow #%s."
+msgstr ""
+
+#: includes/Actions/Subscription_Edit_Coupon_Abstract.php:63
+msgid "Coupon"
 msgstr ""
 
 #: includes/Actions/Subscription_Edit_Product_Abstract.php:106
@@ -3116,15 +3158,15 @@ msgstr ""
 msgid "%1$s workflow run: removed all line items for %2$s. (Product ID: %3$d; Workflow ID: %4$d)"
 msgstr ""
 
-#: includes/Actions/Subscription_Send_Invoice.php:18
+#: includes/Actions/Subscription_Send_Invoice.php:25
 msgid "Send Invoice"
 msgstr ""
 
-#: includes/Actions/Subscription_Send_Invoice.php:19
+#: includes/Actions/Subscription_Send_Invoice.php:26
 msgid "Email the invoice to the subscription customer."
 msgstr ""
 
-#: includes/Actions/Subscription_Update_Meta.php:20
+#: includes/Actions/Subscription_Update_Meta.php:25
 msgid "This action can add or update a subscription's custom field. Please note that it should not be used to update internal fields like the subscription schedule."
 msgstr ""
 
@@ -3233,6 +3275,11 @@ msgstr ""
 msgid "Communication"
 msgstr ""
 
+#: includes/Communication_Page.php:64
+#: includes/Frontend_Form_Handler.php:89
+msgid "Saved successfully! You won't receive marketing communications from us."
+msgstr ""
+
 #: includes/Coupon_Generator.php:46
 msgid "Generated by AutomateWoo"
 msgstr ""
@@ -3331,7 +3378,7 @@ msgstr ""
 msgid "Teachers"
 msgstr ""
 
-#: includes/DataTypes/Subscription.php:76
+#: includes/DataTypes/Subscription.php:77
 #: includes/Subscription_Workflow_Helper.php:22
 #: includes/Triggers/Utilities/SubscriptionGroup.php:18
 msgid "Subscriptions"
@@ -3398,8 +3445,8 @@ msgstr ""
 
 #: includes/Fields/BookingStatus.php:24
 #: includes/Fields/Order_Status.php:24
-#: includes/Fields/Subscription_Products.php:27
-#: includes/Fields/Subscription_Status.php:26
+#: includes/Fields/Subscription_Products.php:32
+#: includes/Fields/Subscription_Status.php:28
 #: includes/Subscription_Workflow_Helper.php:252
 msgid "[Any]"
 msgstr ""
@@ -3486,12 +3533,12 @@ msgstr ""
 msgid "(Quiz not found)"
 msgstr ""
 
-#: includes/Fields/Subscription_Products.php:26
+#: includes/Fields/Subscription_Products.php:31
 #: includes/Subscription_Workflow_Helper.php:33
 msgid "Subscription products"
 msgstr ""
 
-#: includes/Fields/Subscription_Status.php:23
+#: includes/Fields/Subscription_Status.php:25
 msgid "Subscription status"
 msgstr ""
 
@@ -3525,7 +3572,7 @@ msgctxt "time field"
 msgid "MM"
 msgstr ""
 
-#: includes/Fields/User_Role.php:22
+#: includes/Fields/User_Role.php:27
 msgid "User role"
 msgstr ""
 
@@ -3602,10 +3649,6 @@ msgstr ""
 msgid "Thanks! Your signup was successful."
 msgstr ""
 
-#: includes/Frontend_Form_Handler.php:89
-msgid "Saved successfully! You won't receive marketing communications from us."
-msgstr ""
-
 #. translators: 1: Deprecated class name, 2: Version number, 3: Replacement class name.
 #: includes/helpers.php:763
 msgid "%1$s is deprecated since version %2$s! Use %3$s instead."
@@ -3654,10 +3697,6 @@ msgstr ""
 msgid "Unexpected response when trying to retrieve all custom fields"
 msgstr ""
 
-#: includes/Integrations/ActiveCampaign.php:401
-msgid "Unexpected response when attempting to create a tag"
-msgstr ""
-
 #: includes/Jobs/JobException.php:34
 msgid "Job item not found."
 msgstr ""
@@ -3679,28 +3718,28 @@ msgstr ""
 msgid "This log was created from manual workflow re-run."
 msgstr ""
 
-#: includes/Mailer_Abstract.php:138
+#: includes/Mailer_Abstract.php:157
 msgid "Email address is blank."
 msgstr ""
 
-#: includes/Mailer_Abstract.php:142
+#: includes/Mailer_Abstract.php:161
 msgid "Email address is not valid."
 msgstr ""
 
-#: includes/Mailer_Abstract.php:146
+#: includes/Mailer_Abstract.php:165
 msgid "Email address appears to be anonymized."
 msgstr ""
 
-#: includes/Mailer_Abstract.php:158
+#: includes/Mailer_Abstract.php:177
 msgid "Email address is blacklisted."
 msgstr ""
 
 #. translators: PHP Mailer error message.
-#: includes/Mailer_Abstract.php:214
+#: includes/Mailer_Abstract.php:238
 msgid "PHP Mailer - %s"
 msgstr ""
 
-#: includes/Mailer_Abstract.php:217
+#: includes/Mailer_Abstract.php:241
 msgid "The wp_mail() function returned false."
 msgstr ""
 
@@ -5040,7 +5079,7 @@ msgstr ""
 msgid "Order - Status"
 msgstr ""
 
-#: includes/Rules/Order_Subscription_Failed_Automatic_Payment_Retry_Count.php:19
+#: includes/Rules/Order_Subscription_Failed_Automatic_Payment_Retry_Count.php:23
 msgid "Order - Subscription Failed Automatic Payment Retry Count"
 msgstr ""
 
@@ -5198,7 +5237,7 @@ msgstr ""
 msgid "Shop - Current Date/Time"
 msgstr ""
 
-#: includes/Rules/SubscriptionPaymentCount.php:21
+#: includes/Rules/SubscriptionPaymentCount.php:26
 msgid "Subscription - Payment Count"
 msgstr ""
 
@@ -5230,7 +5269,7 @@ msgstr ""
 msgid "Subscription - Has Payment Method"
 msgstr ""
 
-#: includes/Rules/Subscription_Items.php:18
+#: includes/Rules/Subscription_Items.php:21
 msgid "Subscription - Items"
 msgstr ""
 
@@ -5262,7 +5301,7 @@ msgstr ""
 msgid "Workflow - Run Count For Subscription"
 msgstr ""
 
-#: includes/Rules/Subscription_Status.php:27
+#: includes/Rules/Subscription_Status.php:30
 msgid "Subscription - Status"
 msgstr ""
 
@@ -5993,15 +6032,15 @@ msgstr ""
 msgid "Manual - Subscriptions"
 msgstr ""
 
-#: includes/Triggers/Subscription_Before_End.php:17
+#: includes/Triggers/Subscription_Before_End.php:22
 msgid "Subscription Before End"
 msgstr ""
 
-#: includes/Triggers/Subscription_Before_End.php:18
+#: includes/Triggers/Subscription_Before_End.php:23
 msgid "This trigger runs once per day for any subscriptions that are due to expire/end on the workflow's target date. For example, if set to run 7 days before end, it would look for subscriptions that are due to end on the date exactly 7 days from now."
 msgstr ""
 
-#: includes/Triggers/Subscription_Before_End.php:29
+#: includes/Triggers/Subscription_Before_End.php:36
 msgid "Days before end"
 msgstr ""
 
@@ -6065,11 +6104,11 @@ msgstr ""
 msgid "This trigger fires after the status of any subscription order changes. The trigger can be set to run on specific order status changes and for specific order types."
 msgstr ""
 
-#: includes/Triggers/Subscription_Payment_Complete.php:30
+#: includes/Triggers/Subscription_Payment_Complete.php:33
 msgid "Subscription Renewal Payment Complete"
 msgstr ""
 
-#: includes/Triggers/Subscription_Payment_Failed.php:30
+#: includes/Triggers/Subscription_Payment_Failed.php:33
 msgid "Subscription Renewal Payment Failed"
 msgstr ""
 
@@ -6097,7 +6136,7 @@ msgstr ""
 msgid "This trigger runs for every line item of a subscription when the status changes. Using this trigger allows access to the product data of the subscription line item."
 msgstr ""
 
-#: includes/Triggers/Subscription_Trial_End.php:23
+#: includes/Triggers/Subscription_Trial_End.php:26
 msgid "Subscription Trial End"
 msgstr ""
 
@@ -6333,11 +6372,10 @@ msgid "Number of days the coupon will be valid for. If left blank then the expir
 msgstr ""
 
 #: includes/Variables/Abstract_Generate_Coupon.php:31
-#: includes/Variables/Abstract_Generate_Coupon.php:32
 msgid "The prefix for the coupon code, defaults to 'aw-'. To remove the prefix set this field to a single space character."
 msgstr ""
 
-#: includes/Variables/Abstract_Generate_Coupon.php:33
+#: includes/Variables/Abstract_Generate_Coupon.php:32
 msgid "The number of times the generated coupon can be used. Set to '0' for unlimited."
 msgstr ""
 
@@ -7190,7 +7228,7 @@ msgstr ""
 msgid "Displays the admin URL of the subscription."
 msgstr ""
 
-#: includes/Variables/Subscription_Billing_Address.php:15
+#: includes/Variables/Subscription_Billing_Address.php:18
 msgid "Displays the formatted billing address for the subscription."
 msgstr ""
 
@@ -7202,15 +7240,15 @@ msgstr ""
 msgid "Displays the early renewal URL for the subscription."
 msgstr ""
 
-#: includes/Variables/Subscription_End_Date.php:16
+#: includes/Variables/Subscription_End_Date.php:19
 msgid "Displays the subscription end date in your website's timezone."
 msgstr ""
 
-#: includes/Variables/Subscription_ID.php:15
+#: includes/Variables/Subscription_ID.php:19
 msgid "Displays the ID of the subscription."
 msgstr ""
 
-#: includes/Variables/Subscription_Items.php:19
+#: includes/Variables/Subscription_Items.php:23
 msgid "Displays a product listing of items in a subscription."
 msgstr ""
 
@@ -7230,15 +7268,15 @@ msgstr ""
 msgid "Can be used to display the quantity of a product line item on a subscription."
 msgstr ""
 
-#: includes/Variables/Subscription_Last_Payment_Date.php:16
+#: includes/Variables/Subscription_Last_Payment_Date.php:19
 msgid "Displays the date of the most recent payment for the subscription."
 msgstr ""
 
-#: includes/Variables/Subscription_Meta.php:16
+#: includes/Variables/Subscription_Meta.php:19
 msgid "Displays a subscription's custom field."
 msgstr ""
 
-#: includes/Variables/Subscription_Next_Payment_Date.php:16
+#: includes/Variables/Subscription_Next_Payment_Date.php:19
 msgid "Displays the subscription next payment date in your website timezone."
 msgstr ""
 
@@ -7246,7 +7284,7 @@ msgstr ""
 msgid "Displays the subscription payment count."
 msgstr ""
 
-#: includes/Variables/Subscription_Payment_Method.php:15
+#: includes/Variables/Subscription_Payment_Method.php:18
 msgid "Displays the payment method of the subscription."
 msgstr ""
 
@@ -7254,15 +7292,15 @@ msgstr ""
 msgid "Displays the subscription retry payment date in your website timezone."
 msgstr ""
 
-#: includes/Variables/Subscription_Shipping_Address.php:15
+#: includes/Variables/Subscription_Shipping_Address.php:18
 msgid "Displays the formatted shipping address for the subscription."
 msgstr ""
 
-#: includes/Variables/Subscription_Start_Date.php:16
+#: includes/Variables/Subscription_Start_Date.php:19
 msgid "Displays the subscription start date in your website's timezone."
 msgstr ""
 
-#: includes/Variables/Subscription_Status.php:15
+#: includes/Variables/Subscription_Status.php:19
 msgid "Displays the formatted status of the subscription."
 msgstr ""
 
@@ -7270,11 +7308,11 @@ msgstr ""
 msgid "Displays the subscription's recurring total."
 msgstr ""
 
-#: includes/Variables/Subscription_Trial_End_Date.php:16
+#: includes/Variables/Subscription_Trial_End_Date.php:19
 msgid "Displays the subscription trial end date in your website's timezone."
 msgstr ""
 
-#: includes/Variables/Subscription_View_Order_Url.php:17
+#: includes/Variables/Subscription_View_Order_Url.php:20
 msgid "Displays a URL to the subscription page in the My Account area."
 msgstr ""
 

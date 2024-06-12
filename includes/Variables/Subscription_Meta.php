@@ -1,19 +1,22 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Variable_Subscription_Meta
  */
 class Variable_Subscription_Meta extends Variable_Abstract_Meta {
 
-
-	function load_admin_details() {
+	/**
+	 * Load admin details.
+	 */
+	public function load_admin_details() {
 		parent::load_admin_details();
-		$this->description = __( "Displays a subscription's custom field.", 'automatewoo');
+		$this->description = __( "Displays a subscription's custom field.", 'automatewoo' );
 	}
 
 
@@ -23,7 +26,7 @@ class Variable_Subscription_Meta extends Variable_Abstract_Meta {
 	 *
 	 * @return string
 	 */
-	function get_value( $subscription, $parameters ) {
+	public function get_value( $subscription, $parameters ) {
 		if ( $parameters['key'] ) {
 			return (string) $subscription->get_meta( $parameters['key'] );
 		}

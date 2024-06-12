@@ -1,28 +1,30 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Variable_Subscription_Payment_Method
  */
 class Variable_Subscription_Payment_Method extends Variable {
 
-
-	function load_admin_details() {
-		$this->description = __( "Displays the payment method of the subscription.", 'automatewoo');
+	/**
+	 * Method to set description and other admin props
+	 */
+	public function load_admin_details() {
+		$this->description = __( 'Displays the payment method of the subscription.', 'automatewoo' );
 	}
 
 
 	/**
-	 * @param $subscription \WC_Subscription
-	 * @param $parameters
+	 * @param \WC_Subscription $subscription
+	 * @param array            $parameters
 	 * @return string
 	 */
-	function get_value( $subscription, $parameters ) {
+	public function get_value( $subscription, $parameters ) {
 		return $subscription->get_payment_method_to_display();
 	}
 }
-

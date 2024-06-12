@@ -388,6 +388,11 @@ class Workflow_Email {
 			return new \WP_Error( 'email_unsubscribed', __( "The recipient is not opted-in to this workflow.", 'automatewoo' ) );
 		}
 
+		if ( ! $this->workflow->is_transactional() ) {
+			$mailer->set_one_click_unsubscribe( Frontend::get_communication_page_permalink( $customer, 'unsubscribe' ) );
+		}
+
+
 		\AW_Mailer_API::setup( $mailer, $this->workflow );
 
 		$sent = $mailer->send();

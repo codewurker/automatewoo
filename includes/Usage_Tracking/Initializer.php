@@ -3,7 +3,6 @@
 namespace AutomateWoo\Usage_Tracking;
 
 use AutomateWoo\Exceptions\InvalidClass;
-use WC_Site_Tracking;
 
 /**
  * Static Helper Class for tracks.
@@ -27,7 +26,7 @@ class Initializer {
 	 * general store data, referred to as the "Tracker". Here we initialize both types of data.
 	 */
 	public static function init() {
-		if ( ! ( apply_filters( 'automatewoo/usage_tracking/enabled', true ) && WC_Site_Tracking::is_tracking_enabled() ) ) {
+		if ( ! apply_filters( 'automatewoo/usage_tracking/enabled', true ) || 'yes' !== get_option( 'woocommerce_allow_tracking', 'no' ) ) {
 			return;
 		}
 

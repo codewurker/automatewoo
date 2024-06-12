@@ -46,35 +46,6 @@ class Fields_Helper {
 		return $list;
 	}
 
-
-	/**
-	 * @since 3.3.2
-	 * @return array
-	 */
-	static function get_coupons_list() {
-		$list = [];
-
-		$query = new \WP_Query([
-			'post_type' => 'shop_coupon',
-			'posts_per_page' => -1,
-			'no_found_rows' => true,
-			'meta_query' => [
-				[
-					'key' => '_is_aw_coupon',
-					'compare' => 'NOT EXISTS'
-				]
-			]
-		]);
-
-		foreach ( $query->posts as $coupon ) {
-			$code = wc_format_coupon_code( $coupon->post_title );
-			$list[ $code ] = $code;
-		}
-
-		return $list;
-	}
-
-
 	/**
 	 * @return array
 	 */

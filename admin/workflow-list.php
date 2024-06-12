@@ -1,12 +1,13 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
 use AutomateWoo\Workflows\TimingDescriptionGenerator;
 use AutomateWoo\Workflows\Factory;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Admin_Workflow_List
@@ -17,68 +18,71 @@ class Admin_Workflow_List {
 	/**
 	 * Constructor
 	 */
-	function __construct() {
+	public function __construct() {
 
-		add_filter( 'manage_posts_columns' , [ $this, 'columns'] );
-		add_filter( 'manage_posts_custom_column' , [ $this, 'column_data'], 10 , 2 );
-		add_filter( 'bulk_actions-edit-aw_workflow' , [ $this, 'bulk_actions' ], 10 , 2 );
-		add_filter( 'post_row_actions' , [ $this, 'row_actions' ], 10 , 2 );
+		add_filter( 'manage_posts_columns', [ $this, 'columns' ] );
+		add_action( 'manage_posts_custom_column', [ $this, 'column_data' ], 10, 2 );
+		add_filter( 'bulk_actions-edit-aw_workflow', [ $this, 'bulk_actions' ], 10, 2 );
+		add_filter( 'post_row_actions', [ $this, 'row_actions' ], 10, 2 );
 		add_filter( 'request', [ $this, 'filter_request_query_vars' ] );
 		add_filter( 'views_edit-aw_workflow', [ $this, 'filter_views' ] );
 
 		$this->statuses();
 	}
 
-
 	/**
-	 * @param $columns
-	 * @return array
+	 * Alters the columns displayed in the Posts list table.
+	 *
+	 * @param string[] $columns An associative array of column headings.
+	 * @return string[] Altered column headings.
 	 */
-	function columns( $columns ) {
+	public function columns( $columns ) {
 
 		unset( $columns['date'] );
 		unset( $columns['stats'] );
 		unset( $columns['likes'] );
 
-		$columns['timing'] = __( 'Timing', 'automatewoo' );
-		$columns['times_run'] = __( 'Run Count', 'automatewoo' );
-		$columns['queued'] = __( 'Queue Count', 'automatewoo' );
+		$columns['timing']           = __( 'Timing', 'automatewoo' );
+		$columns['times_run']        = __( 'Run Count', 'automatewoo' );
+		$columns['queued']           = __( 'Queue Count', 'automatewoo' );
 		$columns['aw_status_toggle'] = '';
 
 		return $columns;
 	}
 
-
 	/**
-	 * @param $column
-	 * @param $post_id
+	 * Alters a custom column in the Posts list table.
+	 *
+	 * @param string $column The name of the column to display.
+	 * @param int    $post_id The current post ID.
 	 */
-	function column_data( $column, $post_id ) {
+	public function column_data( $column, $post_id ) {
 		$workflow = Factory::get( $post_id );
 
-		if ( ! $workflow )
+		if ( ! $workflow ) {
 			return;
+		}
 
 		switch ( $column ) {
 
 			case 'timing':
-				echo $this->get_timing_text( $workflow );
+				echo esc_attr( $this->get_timing_text( $workflow ) );
 				break;
 
 			case 'times_run':
-				if ( $count = $workflow->get_times_run() ) {
-					echo '<a href="' . esc_url( add_query_arg( '_workflow', $workflow->get_id(), Admin::page_url( 'logs' ) ) ) . '">' . $count . '</a>';
-				}
-				else {
+				$count = $workflow->get_times_run();
+				if ( $count ) {
+					echo '<a href="' . esc_url( add_query_arg( '_workflow', $workflow->get_id(), Admin::page_url( 'logs' ) ) ) . '">' . esc_attr( $count ) . '</a>';
+				} else {
 					echo '-';
 				}
 				break;
 
 			case 'queued':
-				if ( $count = $workflow->get_current_queue_count() ) {
-					echo '<a href="' . esc_url( add_query_arg( '_workflow', $workflow->get_id(), Admin::page_url( 'queue' ) ) ) . '">' . $count . '</a>';
-				}
-				else {
+				$count = $workflow->get_current_queue_count();
+				if ( $count ) {
+					echo '<a href="' . esc_url( add_query_arg( '_workflow', $workflow->get_id(), Admin::page_url( 'queue' ) ) ) . '">' . esc_attr( $count ) . '</a>';
+				} else {
 					echo '-';
 				}
 				break;
@@ -109,44 +113,49 @@ class Admin_Workflow_List {
 	/**
 	 * Tweak workflow statuses
 	 */
-	function statuses() {
+	public function statuses() {
 
 		global $wp_post_statuses;
 
-		// rename published
+		/* translators: %s: the count of published workflows */
 		$wp_post_statuses['publish']->label_count = _n_noop( 'Active <span class="count">(%s)</span>', 'Active <span class="count">(%s)</span>', 'automatewoo' );
-
-		$trash = $wp_post_statuses['trash'];
-		unset( $wp_post_statuses['trash'] );
-		$wp_post_statuses['trash'] = $trash;
 	}
 
 
 	/**
-	 * @param $actions
-	 * @return mixed
+	 * Alters the items in the bulk actions menu of the list table.
+	 *
+	 * @param array $actions An array of the available bulk actions.
+	 *
+	 * @return array The altered bulk actions.
 	 */
-	function bulk_actions( $actions ) {
-		unset($actions['edit']);
+	public function bulk_actions( $actions ) {
+		unset( $actions['edit'] );
+		return $actions;
+	}
+
+	/**
+	 * Alters the array of row action links on the Posts list table.
+	 *
+	 * @param string[] $actions An array of row action links. Defaults are
+	 *                           'Edit', 'Quick Edit', 'Restore', 'Trash',
+	 *                           'Delete Permanently', 'Preview', and 'View'.
+	 *
+	 * @return string[] The altered array of row action links.
+	 */
+	public function row_actions( $actions ) {
+		unset( $actions['inline hide-if-no-js'] );
 		return $actions;
 	}
 
 
 	/**
-	 * @param $actions
-	 * @return mixed
+	 * Get the timing description string for a workflow.
+	 *
+	 * @param Workflow $workflow The workflow to get the timing description string.
+	 * @return string The timing description string.
 	 */
-	function row_actions( $actions ) {
-		unset($actions['inline hide-if-no-js']);
-		return $actions;
-	}
-
-
-	/**
-	 * @param Workflow $workflow
-	 * @return string
-	 */
-	function get_timing_text( $workflow ) {
+	public function get_timing_text( $workflow ) {
 		try {
 			return ( new TimingDescriptionGenerator( $workflow ) )->generate();
 		} catch ( \Exception $e ) {
@@ -220,5 +229,4 @@ class Admin_Workflow_List {
 
 		return $views;
 	}
-
 }

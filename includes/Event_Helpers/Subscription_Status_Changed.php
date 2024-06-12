@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo\Event_Helpers;
 
@@ -9,33 +8,36 @@ namespace AutomateWoo\Event_Helpers;
 class Subscription_Status_Changed {
 
 	/** @var bool */
-	public static $_doing_payment = false;
+	public static $doing_payment = false;
 
 
-	static function init() {
+	/**
+	 * Initializer function
+	 */
+	public static function init() {
 		// Whenever a renewal payment is due subscription is placed on hold and then back to active if successful
 		// Block this trigger while this happens
-		add_action( 'woocommerce_scheduled_subscription_payment', [ __CLASS__, 'before_payment' ], 0, 1 );
-		add_action( 'woocommerce_scheduled_subscription_payment', [ __CLASS__, 'after_payment' ], 1000, 1 );
+		add_action( 'woocommerce_scheduled_subscription_payment', [ __CLASS__, 'before_payment' ], 0, 0 );
+		add_action( 'woocommerce_scheduled_subscription_payment', [ __CLASS__, 'after_payment' ], 1000 );
 
 		add_action( 'woocommerce_subscription_status_updated', [ __CLASS__, 'status_changed' ], 10, 3 );
 	}
 
 
 	/**
-	 * @param $subscription_id
+	 * Function to run before the payment is done
 	 */
-	static function before_payment( $subscription_id ) {
-		self::$_doing_payment = true;
+	public static function before_payment() {
+		self::$doing_payment = true;
 	}
 
 
 	/**
-	 * @param $subscription_id
+	 * @param int $subscription_id
 	 */
-	static function after_payment( $subscription_id ) {
+	public static function after_payment( $subscription_id ) {
 
-		self::$_doing_payment = false;
+		self::$doing_payment = false;
 
 		$subscription = wcs_get_subscription( $subscription_id );
 
@@ -48,16 +50,15 @@ class Subscription_Status_Changed {
 
 	/**
 	 * @param \WC_Subscription $subscription
-	 * @param string $new_status
-	 * @param string $old_status
+	 * @param string           $new_status
+	 * @param string           $old_status
 	 */
-	static function status_changed( $subscription, $new_status, $old_status ) {
+	public static function status_changed( $subscription, $new_status, $old_status ) {
 
-		if ( self::$_doing_payment || ! $subscription ) {
+		if ( self::$doing_payment || ! $subscription ) {
 			return;
 		}
 
 		do_action( 'automatewoo/subscription/status_changed', $subscription->get_id(), $new_status, $old_status );
 	}
-
 }

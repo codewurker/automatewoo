@@ -1,5 +1,21 @@
 *** AutomateWoo Changelog ***
 
+2024-06-11 - version 6.0.25
+* Add - Action to manage WooCommerce Membership statuses.
+* Add - Support for one-click unsubscribe links in non-transactional emails.
+* Dev - PHPCS for Campaign Monitor files.
+* Dev - PHPCS for Order Actions files.
+* Dev - PHPCS for WooCommerce Subscriptions related files.
+* Dev - PHPCS for list-table, workflow-list and coupons-list.
+* Dev - PHPCS for: Actions/Customer_Add_Tags, Actions/Customer_Remove_Tags and Actions/Customer_Change_Role.
+* Fix - Input validation on variable modal fields.
+* Fix - Security issues.
+* Fix - The coupon code formatting to avoid the related Actions or Variables not working correctly.
+* Fix - WC_Site_Tracking throwing a fatal error.
+* Tweak - Add more logs when Active Campaign doesn't find the Contact Tag.
+* Tweak - Compatible with the React 18 used since WordPress 6.2.
+* Tweak - WC 9.0 compatibility.
+
 2024-05-21 - version 6.0.24
 * Fix - The usage of the `automatewoo/workflows/presets` filter.
 * Tweak - Add Order data to the Booking DataLayer.

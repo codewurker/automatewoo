@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo\DataTypes;
 
@@ -7,7 +6,9 @@ use AutomateWoo\Clean;
 use AutomateWoo\Integrations;
 use WC_Subscription;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Subscription data type class.
@@ -16,10 +17,10 @@ class Subscription extends AbstractDataType {
 
 
 	/**
-	 * @param $item
+	 * @param WC_Subscription $item
 	 * @return bool
 	 */
-	function validate( $item ) {
+	public function validate( $item ) {
 		return $item instanceof WC_Subscription;
 	}
 
@@ -28,17 +29,17 @@ class Subscription extends AbstractDataType {
 	 * @param WC_Subscription $item
 	 * @return mixed
 	 */
-	function compress( $item ) {
+	public function compress( $item ) {
 		return $item->get_id();
 	}
 
 
 	/**
-	 * @param $compressed_item
-	 * @param $compressed_data_layer
+	 * @param string|int  $compressed_item
+	 * @param array|false $compressed_data_layer
 	 * @return WC_Subscription|false
 	 */
-	function decompress( $compressed_item, $compressed_data_layer ) {
+	public function decompress( $compressed_item, $compressed_data_layer ) {
 		$id = Clean::id( $compressed_item );
 
 		if ( ! Integrations::is_subscriptions_active() || ! $id ) {
@@ -75,5 +76,4 @@ class Subscription extends AbstractDataType {
 	public function get_plural_name() {
 		return __( 'Subscriptions', 'automatewoo' );
 	}
-
 }

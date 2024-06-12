@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo\Rules;
 
@@ -12,27 +11,32 @@ defined( 'ABSPATH' ) || exit;
  */
 class SubscriptionPaymentCount extends Abstract_Number {
 
+	/** @var string */
 	public $data_item = 'subscription';
 
+	/** @var bool */
 	public $support_floats = false;
 
-
-	function init() {
+	/**
+	 * Initializer
+	 *
+	 * @return void
+	 */
+	public function init() {
 		$this->title = __( 'Subscription - Payment Count', 'automatewoo' );
 	}
 
 
 	/**
 	 * @param WC_Subscription $subscription
-	 * @param $compare
-	 * @param $value
+	 * @param string          $compare
+	 * @param mixed           $value
 	 * @return bool
 	 */
-	function validate( $subscription, $compare, $value ) {
+	public function validate( $subscription, $compare, $value ) {
 		// Method changed in WCS 2.6
 		$payment_count = is_callable( [ $subscription, 'get_payment_count' ] ) ? $subscription->get_payment_count() : $subscription->get_completed_payment_count();
 
 		return $this->validate_number( $payment_count, $compare, $value );
 	}
-
 }

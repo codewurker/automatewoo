@@ -1,28 +1,38 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Action_Order_Update_Customer_Shipping_Note
  */
 class Action_Order_Update_Customer_Shipping_Note extends Action {
 
+	/**
+	 * The data items required by the action.
+	 *
+	 * @var array
+	 */
 	public $required_data_items = [ 'order' ];
 
-
-	function load_admin_details() {
+	/**
+	 * Method to set the action's admin props.
+	 *
+	 * Admin props include: title, group and description.
+	 */
+	public function load_admin_details() {
 		$this->title = __( 'Update Customer Provided Note', 'automatewoo' );
 		$this->group = __( 'Order', 'automatewoo' );
 	}
 
 
 	/**
-	 * @return mixed
+	 * Method to load the action's fields.
 	 */
-	function load_fields() {
+	public function load_fields() {
 
 		$note = ( new Fields\Text_Area() )
 			->set_name( 'note' )
@@ -40,25 +50,29 @@ class Action_Order_Update_Customer_Shipping_Note extends Action {
 		$this->add_field( $append_checkbox );
 	}
 
+	/**
+	 * Run the action.
+	 *
+	 * @throws \Exception When an error occurs.
+	 */
+	public function run() {
+		$order = $this->workflow->data_layer()->get_order();
 
-	function run() {
-		if ( ! $order = $this->workflow->data_layer()->get_order() ) {
+		if ( ! $order ) {
 			return;
 		}
 
-		$note = $this->get_option( 'note', true );
+		$note   = $this->get_option( 'note', true );
 		$append = $this->get_option( 'append' );
 
 		if ( $append ) {
 			$existing_note = $order->get_customer_note();
-			$new_note = $existing_note ? $existing_note . ' | ' . $note : $note;
-		}
-		else {
+			$new_note      = $existing_note ? $existing_note . ' | ' . $note : $note;
+		} else {
 			$new_note = $note;
 		}
 
 		$order->set_customer_note( $new_note );
 		$order->save();
 	}
-
 }

@@ -66,6 +66,14 @@ abstract class Mailer_Abstract {
 	public $email_type = 'html';
 
 	/**
+	 * URL to set as the List-Unsubscribe header to support one click
+	 * unsubscribe. Header will not be included if value is false.
+	 *
+	 * @var string|bool
+	 */
+	public $one_click_unsubscribe = false;
+
+	/**
 	 * Returns email body, can be HTML or plain text.
 	 *
 	 * @since 4.4.0
@@ -100,6 +108,17 @@ abstract class Mailer_Abstract {
 	 */
 	public function set_subject( $subject ) {
 		$this->subject = $subject;
+	}
+
+	/**
+	 * Set the URL for the one click unsubscribe header
+	 *
+	 * @param string $url The URL where a POST request will be received to unsubscribe an email address
+	 *
+	 * @return void
+	 */
+	public function set_one_click_unsubscribe( $url ) {
+		$this->one_click_unsubscribe = $url;
 	}
 
 	/**
@@ -190,6 +209,11 @@ abstract class Mailer_Abstract {
 
 		if ( $this->reply_to ) {
 			$headers[] = 'Reply-To: ' . $this->reply_to;
+		}
+
+		if ( $this->one_click_unsubscribe ) {
+			$headers[] = 'List-Unsubscribe-Post: List-Unsubscribe=One-Click';
+			$headers[] = "List-Unsubscribe: <$this->one_click_unsubscribe>";
 		}
 
 		$subject = wp_specialchars_decode( $this->subject, ENT_QUOTES );

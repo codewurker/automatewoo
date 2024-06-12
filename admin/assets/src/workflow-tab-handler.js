@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import { render, unmountComponentAtNode } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { recordEvent } from '@woocommerce/tracks';
+import { createRoot, render, unmountComponentAtNode } from '@wordpress/element'; // eslint-disable-line import/named
 
 /**
  * Internal dependencies
@@ -67,16 +67,24 @@ const loadTabHandler = ( defaultTabName, tabs ) => {
 
 		currentTab = tabName;
 
-		render(
+		const pageTabs = (
 			<PageTabs
 				tabs={ tabs }
 				onSelect={ onTabSelect }
 				initialTabName={ tabName }
 			>
 				{ getTabContent }
-			</PageTabs>,
-			tabsRootEl
+			</PageTabs>
 		);
+
+		if ( typeof createRoot !== 'undefined' ) {
+			// compatibility-code "WP >= 6.2" -- React >= 18
+			reactTabsRoot = createRoot( tabsRootEl );
+			reactTabsRoot.render( pageTabs );
+		} else {
+			// compatibility-code "WP < 6.2" -- React < 18
+			render( pageTabs, tabsRootEl );
+		}
 
 		recordTracksTabViewEvent( tabName );
 		hackyUpdateAllWorkflowsTabVisibility( tabName );
@@ -95,7 +103,17 @@ const loadTabHandler = ( defaultTabName, tabs ) => {
 		}
 
 		// Hack: Unmount and rerender tabs because we can't programmatically change the current tab
-		unmountComponentAtNode( tabsRootEl );
+		if ( typeof createRoot !== 'undefined' ) {
+			// compatibility-code "WP >= 6.2" -- React >= 18
+			if ( reactTabsRoot ) {
+				reactTabsRoot.unmount();
+				reactTabsRoot = null;
+			}
+		} else {
+			// compatibility-code "WP < 6.2" -- React < 18
+			unmountComponentAtNode( tabsRootEl );
+		}
+
 		renderPageTabs( tabName );
 	};
 
@@ -120,6 +138,7 @@ const loadTabHandler = ( defaultTabName, tabs ) => {
 
 	// Init
 	let currentTab;
+	let reactTabsRoot;
 	const tabsRootEl = insertTabsRootDomElement();
 	window.addEventListener( 'hashchange', handleHashChange, false );
 	renderPageTabs( getHash() );

@@ -35,7 +35,26 @@ jQuery( function ( $ ) {
 		init_clipboard() {
 			const clipboard = new ClipboardJS( '.aw-clipboard-btn', {
 				text() {
-					return $( '#aw_workflow_variable_preview_field' ).text();
+					let text = $(
+						'#aw_workflow_variable_preview_field'
+					).text();
+
+					$( '.aw-workflow-variable-parameter' ).each( function (
+						i,
+						field
+					) {
+						if (
+							$( field ).prop( 'required' ) &&
+							! $( field ).get( 0 ).checkValidity()
+						) {
+							$( field ).get( 0 ).reportValidity();
+							text = false;
+
+							return false;
+						}
+					} );
+
+					return text;
 				},
 			} );
 

@@ -1,9 +1,10 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Integration_Campaign_Monitor
@@ -25,11 +26,11 @@ class Integration_Campaign_Monitor extends Integration {
 
 
 	/**
-	 * @param string $api_key
+	 * @param string       $api_key
 	 * @param string|false $client_id client ID is not required to support legacy action
 	 */
-	function __construct( $api_key, $client_id = false ) {
-		$this->api_key = $api_key;
+	public function __construct( $api_key, $client_id = false ) {
+		$this->api_key   = $api_key;
 		$this->client_id = $client_id;
 	}
 
@@ -54,21 +55,21 @@ class Integration_Campaign_Monitor extends Integration {
 	/**
 	 * Automatically logs errors
 	 *
-	 * @param $method
-	 * @param $endpoint
-	 * @param $args
+	 * @param string $method
+	 * @param string $endpoint
+	 * @param array  $args
 	 *
 	 * @return Remote_Request
 	 */
-	function request( $method, $endpoint, $args = [] ) {
+	public function request( $method, $endpoint, $args = [] ) {
 		$request_args = [
-			'headers' => [
+			'headers'   => [
 				'Authorization' => 'Basic ' . base64_encode( $this->api_key . ':x' ),
-				'Accept' => 'application/json'
+				'Accept'        => 'application/json',
 			],
-			'timeout' => 10,
-			'method' => $method,
-			'sslverify' => false
+			'timeout'   => 10,
+			'method'    => $method,
+			'sslverify' => false,
 		];
 
 		$url = $this->api_root . $endpoint;
@@ -97,24 +98,25 @@ class Integration_Campaign_Monitor extends Integration {
 	/**
 	 * @return array
 	 */
-	function get_lists() {
+	public function get_lists() {
 		if ( ! $this->client_id ) {
 			return [];
 		}
 
-		if ( $cache = Cache::get_transient( 'campaign_monitor_lists' ) ) {
+		$cache = Cache::get_transient( 'campaign_monitor_lists' );
+		if ( $cache ) {
 			return $cache;
 		}
 
 		$request = $this->request( 'GET', "/clients/{$this->client_id}/lists.json" );
-		$lists = $request->get_body();
-		$clean = [];
+		$lists   = $request->get_body();
+		$clean   = [];
 
 		if ( ! $request->is_successful() ) {
 			return [];
 		}
 
-		foreach( $lists as $list ) {
+		foreach ( $lists as $list ) {
 			$clean[ $list['ListID'] ] = $list['Name'];
 		}
 
@@ -127,9 +129,7 @@ class Integration_Campaign_Monitor extends Integration {
 	/**
 	 * Clear cached data
 	 */
-	function clear_cache_data() {
+	public function clear_cache_data() {
 		Cache::delete_transient( 'campaign_monitor_lists' );
 	}
-
-
 }

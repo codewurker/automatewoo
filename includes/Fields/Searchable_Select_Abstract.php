@@ -75,7 +75,8 @@ abstract class Searchable_Select_Abstract extends Field {
 				data-name="<?php echo esc_attr( $this->get_name() ); ?>"
 				data-allow_clear="true"
 				data-placeholder="<?php esc_attr_e( 'Search&hellip;', 'automatewoo' ); ?>"
-				data-action="<?php echo esc_attr( $this->get_search_ajax_action() ); ?>">
+				data-action="<?php echo esc_attr( $this->get_search_ajax_action() ); ?>"
+				<?php echo ( $this->get_required() ? 'required' : '' ); ?>>
 			<?php
 			foreach ( $options as $option_key => $option_value ) {
 				echo '<option value="' . esc_attr( $option_key ) . '" selected="selected">' . wp_kses_post( $option_value ) . '</option>';

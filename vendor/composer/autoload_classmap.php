@@ -49,6 +49,7 @@ return array(
     'AutomateWoo\\Action_Mailpoet_Unsubscribe' => $baseDir . '/includes/Actions/Mailpoet_Unsubscribe.php',
     'AutomateWoo\\Action_Memberships_Abstract' => $baseDir . '/includes/Actions/Memberships_Abstract.php',
     'AutomateWoo\\Action_Memberships_Change_Plan' => $baseDir . '/includes/Actions/Memberships_Change_Plan.php',
+    'AutomateWoo\\Action_Memberships_Change_Status' => $baseDir . '/includes/Actions/Memberships_Change_Status.php',
     'AutomateWoo\\Action_Memberships_Delete_User_Membership' => $baseDir . '/includes/Actions/Memberships_Delete_User_Membership.php',
     'AutomateWoo\\Action_Order_Add_Note' => $baseDir . '/includes/Actions/Order_Add_Note.php',
     'AutomateWoo\\Action_Order_Change_Status' => $baseDir . '/includes/Actions/Order_Change_Status.php',

@@ -1,9 +1,10 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Action_Order_Add_Note
@@ -11,16 +12,25 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class Action_Order_Add_Note extends Action {
 
+	/**
+	 * The data items required by the action.
+	 *
+	 * @var array
+	 */
 	public $required_data_items = [ 'order' ];
 
-
-	function load_admin_details() {
+	/**
+	 * Method to set title, group, description and other admin props.
+	 */
+	public function load_admin_details() {
 		$this->title = __( 'Add Note', 'automatewoo' );
 		$this->group = __( 'Order', 'automatewoo' );
 	}
 
-
-	function load_fields() {
+	/**
+	 * Method to load the action's fields.
+	 */
+	public function load_fields() {
 		$type = new Fields\Order_Note_Type();
 		$type->set_required();
 
@@ -34,7 +44,7 @@ class Action_Order_Add_Note extends Action {
 		$author->set_required( false );
 
 		$note = new Fields\Text_Area();
-		$note->set_name('note' );
+		$note->set_name( 'note' );
 		$note->set_title( __( 'Note', 'automatewoo' ) );
 		$note->set_variable_validation();
 		$note->set_required();
@@ -44,8 +54,12 @@ class Action_Order_Add_Note extends Action {
 		$this->add_field( $note );
 	}
 
-
-	function run() {
+	/**
+	 * Run the action.
+	 *
+	 * @throws \Exception When an error occurs.
+	 */
+	public function run() {
 		$note_type = $this->get_option( 'note_type' );
 		$author    = $this->get_option( 'note_author' );
 		$note      = $this->get_option( 'note', true );

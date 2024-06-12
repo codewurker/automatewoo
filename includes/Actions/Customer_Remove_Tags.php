@@ -1,23 +1,32 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Action_Customer_Remove_Tags
  */
 class Action_Customer_Remove_Tags extends Action_Customer_Add_Tags {
 
-	function load_admin_details() {
+	/**
+	 * Method to load the action's fields.
+	 */
+	public function load_admin_details() {
 		parent::load_admin_details();
 		$this->title = __( 'Remove Tags', 'automatewoo' );
 	}
 
-
-	function run() {
-		if ( ! $customer = $this->workflow->data_layer()->get_customer() ) {
+	/**
+	 * Run the action.
+	 *
+	 * @throws \Exception When an error occurs.
+	 */
+	public function run() {
+		$customer = $this->workflow->data_layer()->get_customer();
+		if ( ! $customer ) {
 			return;
 		}
 
@@ -29,5 +38,4 @@ class Action_Customer_Remove_Tags extends Action_Customer_Add_Tags {
 
 		wp_remove_object_terms( $customer->get_user_id(), $tags, 'user_tag' );
 	}
-
 }

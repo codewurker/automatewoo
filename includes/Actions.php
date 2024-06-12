@@ -72,6 +72,7 @@ class Actions extends Registry {
 		if ( Integrations::is_memberships_enabled() ) {
 			$includes[ 'memberships_change_plan' ] = 'AutomateWoo\Action_Memberships_Change_Plan';
 			$includes[ 'memberships_delete_user_membership' ] = 'AutomateWoo\Action_Memberships_Delete_User_Membership';
+			$includes[ 'memberships_change_status' ] = 'AutomateWoo\Action_Memberships_Change_Status';
 		}
 
 		if ( Options::mailchimp_enabled() ) {

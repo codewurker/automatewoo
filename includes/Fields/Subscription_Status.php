@@ -1,23 +1,25 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo\Fields;
 
 use AutomateWoo\Subscription_Workflow_Helper;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Subscription_Status
  */
 class Subscription_Status extends Select {
 
+	/** @var string */
 	protected $name = 'subscription_status';
 
 	/**
 	 * @param bool $allow_all
 	 */
-	function __construct( $allow_all = true ) {
+	public function __construct( $allow_all = true ) {
 		parent::__construct( true );
 
 		$this->set_title( __( 'Subscription status', 'automatewoo' ) );
@@ -28,5 +30,4 @@ class Subscription_Status extends Select {
 
 		$this->set_options( Subscription_Workflow_Helper::get_subscription_statuses() );
 	}
-
 }

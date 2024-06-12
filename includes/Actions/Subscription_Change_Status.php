@@ -1,9 +1,10 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Action_Subscription_Change_Status
@@ -11,37 +12,51 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class Action_Subscription_Change_Status extends Action {
 
+	/** @var string[] */
 	public $required_data_items = [ 'subscription' ];
 
 
-	function load_admin_details() {
+	/**
+	 * Method to set the action's admin props.
+	 *
+	 * Admin props include: title, group and description.
+	 */
+	public function load_admin_details() {
 		$this->title = __( 'Change Status', 'automatewoo' );
 		$this->group = __( 'Subscription', 'automatewoo' );
 	}
 
-
-	function load_fields() {
+	/**
+	 * Method to load the action's fields.
+	 */
+	public function load_fields() {
 
 		$status = new Fields\Subscription_Status( false );
 		$status->set_name( 'status' );
 		$status->set_required();
 
-		$this->add_field($status);
+		$this->add_field( $status );
 	}
 
-
-	function run() {
+	/**
+	 * Run the action.
+	 */
+	public function run() {
 
 		$subscription = $this->workflow->data_layer()->get_subscription();
-		$status = $this->get_option( 'status' );
+		$status       = $this->get_option( 'status' );
 
-		if ( ! $status || ! $subscription )
+		if ( ! $status || ! $subscription ) {
 			return;
+		}
 
-		$subscription->update_status( $status, sprintf(
-			__( 'Subscription status changed by AutomateWoo Workflow #%s.', 'automatewoo' ),
-			$this->workflow->get_id()
-		));
+		$subscription->update_status(
+			$status,
+			sprintf(
+				// translators: The Workflow ID
+				__( 'Subscription status changed by AutomateWoo Workflow #%s.', 'automatewoo' ),
+				$this->workflow->get_id()
+			)
+		);
 	}
-
 }

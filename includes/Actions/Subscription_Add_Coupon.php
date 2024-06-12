@@ -14,6 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Action_Subscription_Add_Coupon extends Action_Subscription_Edit_Coupon_Abstract {
 
+	/**
+	 * Class constructor
+	 */
+	public function __construct() {
+		// Only recurring coupons can be added to subscriptions.
+		$this->set_recurring_coupon_only( true );
+	}
 
 	/**
 	 * Explain to store admin what this action does via a unique title and description.
@@ -57,17 +64,5 @@ class Action_Subscription_Add_Coupon extends Action_Subscription_Edit_Coupon_Abs
 	protected function get_note( $coupon ) {
 		/* translators: %1$s: workflow title, %2$s coupon code, %3$d workflow ID */
 		return sprintf( __( '%1$s workflow run: added coupon %2$s to subscription. (Workflow ID: %3$d)', 'automatewoo' ), $this->workflow->get_title(), $coupon->get_code(), $this->workflow->get_id() );
-	}
-
-	/**
-	 * Add a recurring coupon selection field for this action
-	 */
-	protected function add_coupon_select_field() {
-		$coupon_select = new Fields\Coupon();
-		$coupon_select->set_required();
-		$coupon_select->set_name( 'coupon' );
-		$coupon_select->set_title( __( 'Coupon', 'automatewoo' ) );
-		$coupon_select->set_recurring_only( true );
-		$this->add_field( $coupon_select );
 	}
 }

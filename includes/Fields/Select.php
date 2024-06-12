@@ -101,7 +101,7 @@ class Select extends Field {
 	 */
 	function render( $value = false ) {
 
-		$value = Clean::recursive( $value );
+		$value = $this->sanitize_value( $value );
 
 		if ( $this->has_dynamic_options() ) {
 			$this->add_data_attr( 'automatewoo-dynamic-select' );

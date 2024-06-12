@@ -1,29 +1,32 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Variable_Subscription_Trial_End_Date
  */
 class Variable_Subscription_Trial_End_Date extends Variable_Abstract_Datetime {
 
-
-	function load_admin_details() {
+	/**
+	 * Load admin details.
+	 */
+	public function load_admin_details() {
 		parent::load_admin_details();
-		$this->description = __( "Displays the subscription trial end date in your website's timezone.", 'automatewoo' );
+		$this->description  = __( "Displays the subscription trial end date in your website's timezone.", 'automatewoo' );
 		$this->description .= ' ' . $this->_desc_format_tip;
 	}
 
 
 	/**
-	 * @param $subscription \WC_Subscription
-	 * @param $parameters
+	 * @param \WC_Subscription $subscription
+	 * @param array            $parameters
 	 * @return string
 	 */
-	function get_value( $subscription, $parameters ) {
+	public function get_value( $subscription, $parameters ) {
 		return $this->format_datetime( $subscription->get_date( 'trial_end' ), $parameters, true );
 	}
 }

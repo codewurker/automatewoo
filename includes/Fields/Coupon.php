@@ -69,4 +69,17 @@ class Coupon extends Searchable_Select_Abstract {
 	public function get_recurring_only() {
 		return $this->recurring_only;
 	}
+
+	/**
+	 * Sanitizes the value of the field.
+	 *
+	 * @since 6.0.25
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	public function sanitize_value( $value ) {
+		return wc_format_coupon_code( $value );
+	}
 }

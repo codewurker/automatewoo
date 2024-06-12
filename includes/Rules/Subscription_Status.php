@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo\Rules;
 
@@ -18,28 +17,35 @@ class Subscription_Status extends Preloaded_Select_Rule_Abstract implements Quic
 
 	use ArrayQuickFilter;
 
+	/** @var string */
 	public $data_item = 'subscription';
 
 
-	function init() {
+	/**
+	 * @return void
+	 */
+	public function init() {
 		parent::init();
 
 		$this->title = __( 'Subscription - Status', 'automatewoo' );
 	}
 
 
-	function load_select_choices() {
+	/**
+	 * @return array
+	 */
+	public function load_select_choices() {
 		return Subscription_Workflow_Helper::get_subscription_statuses();
 	}
 
 
 	/**
-	 * @param $subscription \WC_Subscription
-	 * @param $compare
-	 * @param $value
+	 * @param \WC_Subscription $subscription
+	 * @param string           $compare
+	 * @param array|string     $value
 	 * @return bool
 	 */
-	function validate( $subscription, $compare, $value ) {
+	public function validate( $subscription, $compare, $value ) {
 		return $this->validate_select( 'wc-' . $subscription->get_status(), $compare, $value );
 	}
 
@@ -58,5 +64,4 @@ class Subscription_Status extends Preloaded_Select_Rule_Abstract implements Quic
 	public function get_quick_filter_clause( $compare_type, $value ) {
 		return $this->generate_array_quick_filter_clause( 'status', $compare_type, $value );
 	}
-
 }

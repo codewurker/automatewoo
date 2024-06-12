@@ -29,7 +29,6 @@ abstract class Variable_Abstract_Generate_Coupon extends Variable {
 
 		$this->add_parameter_text_field( 'expires', __( 'Number of days the coupon will be valid for. If left blank then the expiry set for the template coupon will be used.', 'automatewoo' ) );
 		$this->add_parameter_text_field( 'prefix', __( "The prefix for the coupon code, defaults to 'aw-'. To remove the prefix set this field to a single space character.", 'automatewoo' ), false, 'aw-' );
-		$this->add_parameter_text_field( 'prefix', __( "The prefix for the coupon code, defaults to 'aw-'. To remove the prefix set this field to a single space character.", 'automatewoo' ), false, 'aw-' );
 		$this->add_parameter_text_field( 'limit', __( "The number of times the generated coupon can be used. Set to '0' for unlimited.", 'automatewoo' ), false, '1' );
 	}
 
@@ -49,7 +48,8 @@ abstract class Variable_Abstract_Generate_Coupon extends Variable {
 		}
 
 		$coupon_generator = new Coupon_Generator();
-		$coupon_generator->set_template_coupon_code( $parameters['template'] );
+		$template         = html_entity_decode( $parameters['template'] );
+		$coupon_generator->set_template_coupon_code( $template );
 
 		if ( ! $coupon_generator->get_template_coupon_id() ) {
 			return false;

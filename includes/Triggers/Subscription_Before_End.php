@@ -1,28 +1,35 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
 use AutomateWoo\Exceptions\InvalidArgument;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Trigger_Subscription_Before_End
  */
 class Trigger_Subscription_Before_End extends Trigger_Subscription_Before_Renewal {
 
-
-	function load_admin_details() {
-		$this->title       = __( 'Subscription Before End', 'automatewoo' );
+	/**
+	 * Method to set the action's admin props.
+	 *
+	 * Admin props include: title, group and description.
+	 */
+	public function load_admin_details() {
+		$this->title        = __( 'Subscription Before End', 'automatewoo' );
 		$this->description  = __( "This trigger runs once per day for any subscriptions that are due to expire/end on the workflow's target date. For example, if set to run 7 days before end, it would look for subscriptions that are due to end on the date exactly 7 days from now.", 'automatewoo' );
 		$this->description .= ' ' . $this->get_description_text_workflow_not_immediate();
 
-		$this->group       = Subscription_Workflow_Helper::get_group_name();
+		$this->group = Subscription_Workflow_Helper::get_group_name();
 	}
 
-
-	function load_fields() {
+	/**
+	 * Load fields.
+	 */
+	public function load_fields() {
 
 		$days_before = ( new Fields\Positive_Number() )
 			->set_name( 'days_before' )
@@ -78,5 +85,4 @@ class Trigger_Subscription_Before_End extends Trigger_Subscription_Before_Renewa
 
 		return true;
 	}
-
 }
