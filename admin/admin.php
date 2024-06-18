@@ -752,7 +752,7 @@ class Admin {
 				return $url;
 
 			case 'documentation':
-				return 'https://woo.com/document/automatewoo/?utm_source=wordpress&utm_medium=all-plugins-page&utm_campaign=doc-link&utm_content=automatewoo';
+				return 'https://woocommerce.com/document/automatewoo/?utm_source=wordpress&utm_medium=all-plugins-page&utm_campaign=doc-link&utm_content=automatewoo';
 		}
 
 		return false;
@@ -1054,7 +1054,7 @@ class Admin {
 	}
 
 	/**
-	 * Get Woo.com marketplace product link.
+	 * Get WooCommerce.com marketplace product link.
 	 *
 	 * @since 3.7.0
 	 *
@@ -1063,7 +1063,7 @@ class Admin {
 	 * @return string
 	 */
 	public static function get_marketplace_product_link( $product = 'automatewoo' ) {
-		return "https://woo.com/products/$product/";
+		return "https://woocommerce.com/products/$product/";
 	}
 
 	/**

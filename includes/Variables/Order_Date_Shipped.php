@@ -16,7 +16,7 @@ class Variable_Order_Date_Shipped extends Variable_Abstract_Datetime {
 
 		$this->description = sprintf(
 			__( 'Displays the shipping date as set with the <%s>WooCommerce Shipment Tracking<%s> extension.', 'automatewoo' ),
-			'a href="https://woo.com/products/shipment-tracking/" target="_blank"',
+			'a href="https://woocommerce.com/products/shipment-tracking/" target="_blank"',
 			'/a'
 		);
 		$this->description .= ' ' . $this->_desc_format_tip;

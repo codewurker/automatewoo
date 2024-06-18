@@ -1,6 +1,6 @@
 # AutomateWoo Usage Tracking
 
-The files within this directory implement usage tracking for AutomateWoo. This builds on the native [WooCommerce Usage Tracking](https://woo.com/usage-tracking/), and is only enabled when WooCommerce Tracking is enabled.
+The files within this directory implement usage tracking for AutomateWoo. This builds on the native [WooCommerce Usage Tracking](https://woocommerce.com/usage-tracking/), and is only enabled when WooCommerce Tracking is enabled.
 
 When a store opts in to WooCommerce usage tracking and they use AutomateWoo, they will also be opted in to the tracking added by AutomateWoo.
 

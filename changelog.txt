@@ -1,5 +1,9 @@
 *** AutomateWoo Changelog ***
 
+2024-06-18 - version 6.0.26
+* Dev - fix unit tests for protecting admin roles.
+* Tweak -  Replace woo.com references with woocommerce.com.
+
 2024-06-11 - version 6.0.25
 * Add - Action to manage WooCommerce Membership statuses.
 * Add - Support for one-click unsubscribe links in non-transactional emails.

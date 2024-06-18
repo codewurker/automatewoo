@@ -14,7 +14,7 @@ class Variable_Order_Tracking_Number extends Variable {
 	function load_admin_details() {
 		$this->description = sprintf(
 			__( 'Displays the tracking number as set with the <%s>WooCommerce Shipment Tracking<%s> extension.', 'automatewoo' ),
-			'a href="https://woo.com/products/shipment-tracking/" target="_blank"',
+			'a href="https://woocommerce.com/products/shipment-tracking/" target="_blank"',
 			'/a'
 		);
 	}
