@@ -259,7 +259,7 @@ abstract class Mailer_Abstract {
 
 
 	/**
-	 * Callback function to process email variables.
+	 * Callback function to process email variables
 	 *
 	 * @param string $variable
 	 *

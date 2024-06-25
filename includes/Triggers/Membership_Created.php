@@ -1,11 +1,12 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
 use AutomateWoo\Async_Events\MembershipCreated as MembershipCreatedEvent;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Trigger_Membership_Created
@@ -21,22 +22,33 @@ class Trigger_Membership_Created extends Trigger_Abstract_Memberships {
 	 */
 	protected $required_async_events = MembershipCreatedEvent::NAME;
 
-	public $_membership_created_via_admin;
+	/**
+	 * @var int
+	 */
+	private $membership_created_via_admin;
 
 
-	function load_admin_details() {
+	/**
+	 * Method to set title, group, description and other admin props
+	 */
+	public function load_admin_details() {
 		parent::load_admin_details();
 		$this->title = __( 'Membership Created', 'automatewoo' );
 	}
 
-
-	function load_fields() {
+	/**
+	 * Registers any fields used on for a trigger
+	 */
+	public function load_fields() {
 		$plans_field = $this->get_field_membership_plans();
 		$this->add_field( $plans_field );
 	}
 
 
-	function register_hooks() {
+	/**
+	 * Register the hooks when this trigger should run
+	 */
+	public function register_hooks() {
 		if ( is_admin() ) {
 			add_action( 'transition_post_status', [ $this, 'transition_post_status' ], 50, 3 );
 		}
@@ -49,14 +61,14 @@ class Trigger_Membership_Created extends Trigger_Abstract_Memberships {
 
 
 	/**
-	 * @param $new_status
-	 * @param $old_status
+	 * @param string   $new_status
+	 * @param string   $old_status
 	 * @param \WP_Post $post
 	 */
-	function transition_post_status( $new_status, $old_status, $post ) {
+	public function transition_post_status( $new_status, $old_status, $post ) {
 		if ( $old_status === 'auto-draft' && $post->post_type === 'wc_user_membership' ) {
 			// don't trigger now as post transition happens before data is saved
-			$this->_membership_created_via_admin = $post->ID;
+			$this->membership_created_via_admin = $post->ID;
 			add_action( 'wc_memberships_user_membership_saved', [ $this, 'membership_created_via_admin' ], 100, 2 );
 		}
 	}
@@ -64,15 +76,15 @@ class Trigger_Membership_Created extends Trigger_Abstract_Memberships {
 
 	/**
 	 * @param \WC_Memberships_Membership_Plan $plan
-	 * @param $args
+	 * @param array                           $args
 	 */
-	function membership_created_via_admin( $plan, $args ) {
+	public function membership_created_via_admin( $plan, $args ) {
 		// check the created membership is a match
-		if ( $this->_membership_created_via_admin == $args['user_membership_id'] ) {
+		if ( $this->membership_created_via_admin === $args['user_membership_id'] ) {
 			$this->maybe_run_for_membership( (int) $args['user_membership_id'] );
 		}
 	}
-	
+
 	/**
 	 * Handle async membership created event.
 	 *
@@ -96,7 +108,7 @@ class Trigger_Membership_Created extends Trigger_Abstract_Memberships {
 		$this->maybe_run(
 			[
 				'membership' => $membership,
-				'customer'   => Customer_Factory::get_by_user_id( $membership->get_user_id() )
+				'customer'   => Customer_Factory::get_by_user_id( $membership->get_user_id() ),
 			]
 		);
 	}
@@ -107,22 +119,20 @@ class Trigger_Membership_Created extends Trigger_Abstract_Memberships {
 	 *
 	 * @return bool
 	 */
-	function validate_workflow( $workflow ) {
+	public function validate_workflow( $workflow ) {
 		$membership = $workflow->data_layer()->get_membership();
-		$plans = $workflow->get_trigger_option( 'membership_plans' );
+		$plans      = $workflow->get_trigger_option( 'membership_plans' );
 
 		if ( ! $membership ) {
 			return false;
 		}
 
 		if ( ! empty( $plans ) ) {
-			if ( ! in_array( $membership->get_plan_id(), $plans ) ) {
+			if ( ! in_array( $membership->get_plan_id(), array_map( 'intval', $plans ), true ) ) {
 				return false;
 			}
 		}
 
 		return true;
 	}
-
-
 }

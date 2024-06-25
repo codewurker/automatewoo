@@ -1,9 +1,10 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Action_Memberships_Abstract
@@ -11,8 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 abstract class Action_Memberships_Abstract extends Action {
 
-	function load_admin_details() {
+	/**
+	 * Method to set the action's admin props.
+	 */
+	public function load_admin_details() {
 		$this->group = __( 'Membership', 'automatewoo' );
 	}
-
 }

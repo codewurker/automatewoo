@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: AutomateWoo 6.0.26\n"
+"Project-Id-Version: AutomateWoo 6.0.27\n"
 "Report-Msgid-Bugs-To: https://woocommerce.com/my-account/contact-support/\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-18T08:14:43+00:00\n"
+"POT-Creation-Date: 2024-06-25T01:58:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: automatewoo\n"
@@ -739,7 +739,7 @@ msgid "Subscription"
 msgstr ""
 
 #: admin/data-layer-formatter.php:101
-#: includes/Actions/Memberships_Abstract.php:15
+#: includes/Actions/Memberships_Abstract.php:19
 #: includes/Privacy_Exporters.php:370
 msgid "Membership"
 msgstr ""
@@ -2296,7 +2296,7 @@ msgid "If delete is selected the subscriber's email will not be added to the sup
 msgstr ""
 
 #: includes/Actions/Campaign_Monitor_Remove_Subscriber.php:35
-#: includes/Workflow_Email.php:310
+#: includes/Workflow_Email.php:307
 msgid "Unsubscribe"
 msgstr ""
 
@@ -2468,53 +2468,56 @@ msgstr ""
 msgid "Remove customer from list"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:19
+#: includes/Actions/Memberships_Change_Plan.php:27
 msgid "Create / Change Membership Plan For User"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:20
+#: includes/Actions/Memberships_Change_Plan.php:28
 msgid "Changes the plan of a user's active membership. If no active membership exists a new membership can optionally be created."
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:31
+#: includes/Actions/Memberships_Change_Plan.php:41
 msgid "Existing plan"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:32
+#: includes/Actions/Memberships_Change_Plan.php:42
 #: includes/Actions/Memberships_Change_Status.php:47
 msgid "[None]"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:33
+#: includes/Actions/Memberships_Change_Plan.php:43
 msgid "Leave this blank to only create new memberships."
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:38
+#: includes/Actions/Memberships_Change_Plan.php:48
 msgid "New plan"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:43
+#: includes/Actions/Memberships_Change_Plan.php:53
 msgid "Allow membership creation?"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:44
+#: includes/Actions/Memberships_Change_Plan.php:54
 msgid "If checked a new membership will be created for the user if they are not a member of the existing plan."
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:69
+#: includes/Actions/Memberships_Change_Plan.php:81
 msgid "Plan could not be changed or created because the user already has a membership using the new plan."
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:105
+#. translators: The Workflow ID
+#: includes/Actions/Memberships_Change_Plan.php:119
 msgid "Membership created by AutomateWoo workflow #%s"
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:111
+#. translators: The Membership ID
+#: includes/Actions/Memberships_Change_Plan.php:129
 msgid "Membership #%s successfully created."
 msgstr ""
 
-#: includes/Actions/Memberships_Change_Plan.php:125
-msgid "Membership plan changed from %s to %s by AutomateWoo workflow:#%s"
+#. translators: %1$s The Membership plan name, %2$s the new plan name, %3$s The Workflow ID
+#: includes/Actions/Memberships_Change_Plan.php:145
+msgid "Membership plan changed from %1$s to %2$s by AutomateWoo workflow:#%3$s"
 msgstr ""
 
 #: includes/Actions/Memberships_Change_Status.php:24
@@ -2559,23 +2562,25 @@ msgstr ""
 msgid "Membership status doesn't match value specified in Action settings."
 msgstr ""
 
-#: includes/Actions/Memberships_Delete_User_Membership.php:19
+#: includes/Actions/Memberships_Delete_User_Membership.php:29
 msgid "Delete Membership For User"
 msgstr ""
 
-#: includes/Actions/Memberships_Delete_User_Membership.php:29
+#: includes/Actions/Memberships_Delete_User_Membership.php:41
 msgid "Plan"
 msgstr ""
 
-#: includes/Actions/Memberships_Delete_User_Membership.php:53
+#: includes/Actions/Memberships_Delete_User_Membership.php:66
 msgid "The user did not have membership that matched the selected plan."
 msgstr ""
 
-#: includes/Actions/Memberships_Delete_User_Membership.php:62
+#. translators: The Membership ID
+#: includes/Actions/Memberships_Delete_User_Membership.php:76
 msgid "Deleted membership #%s"
 msgstr ""
 
-#: includes/Actions/Memberships_Delete_User_Membership.php:65
+#. translators: The Membership ID
+#: includes/Actions/Memberships_Delete_User_Membership.php:79
 msgid "Failed deleting membership #%s"
 msgstr ""
 
@@ -2688,35 +2693,36 @@ msgstr ""
 msgid "Remove Points"
 msgstr ""
 
-#: includes/Actions/Send_Email.php:29
+#: includes/Actions/Send_Email.php:32
 msgid "Send Email"
 msgstr ""
 
-#: includes/Actions/Send_Email.php:31
-msgid "This action sends an HTML email using a template. The default template matches the style of your WooCommerce transactional emails. <%s>View email templates documentation<%s>."
-msgstr ""
-
-#: includes/Actions/Send_Email.php:43
-msgid "Email heading"
-msgstr ""
-
-#: includes/Actions/Send_Email.php:45
-msgid "The appearance will depend on your email template. Not all templates support this field."
+#. translators: %1$s anchor tag with the link to the documentation link, %2$s closing tag for the anchor
+#: includes/Actions/Send_Email.php:35
+msgid "This action sends an HTML email using a template. The default template matches the style of your WooCommerce transactional emails. <%1$s>View email templates documentation<%2$s>."
 msgstr ""
 
 #: includes/Actions/Send_Email.php:49
-msgid "Email preheader"
+msgid "Email heading"
 msgstr ""
 
 #: includes/Actions/Send_Email.php:51
-msgid "A preheader is a short text summary that follows the subject line when an email is viewed in the inbox. If no preheader is set the first text found in the email is used."
+msgid "The appearance will depend on your email template. Not all templates support this field."
 msgstr ""
 
 #: includes/Actions/Send_Email.php:55
+msgid "Email preheader"
+msgstr ""
+
+#: includes/Actions/Send_Email.php:57
+msgid "A preheader is a short text summary that follows the subject line when an email is viewed in the inbox. If no preheader is set the first text found in the email is used."
+msgstr ""
+
+#: includes/Actions/Send_Email.php:61
 msgid "Template"
 msgstr ""
 
-#: includes/Actions/Send_Email.php:56
+#: includes/Actions/Send_Email.php:62
 msgid "Select which template to use when formatting the email. If you select 'None', the email will have no template but the email will still be sent as an HTML email."
 msgstr ""
 
@@ -2765,27 +2771,27 @@ msgstr ""
 msgid "All HTML will be removed from this field when sending. Variables that use HTML may display unexpectedly because of this."
 msgstr ""
 
-#: includes/Actions/Send_Email_Raw.php:28
+#: includes/Actions/Send_Email_Raw.php:32
 msgid "Send Email - Raw HTML"
 msgstr ""
 
-#: includes/Actions/Send_Email_Raw.php:29
+#: includes/Actions/Send_Email_Raw.php:33
 msgid "This action sends emails with only the HTML/CSS entered in the action's HTML field and is designed for advanced use only. This is different from the standard Send Email action, which inserts the email content into a template. Some variables may display unexpectedly due to the different CSS. Please note that you should include an unsubscribe link by using the variable {{ unsubscribe_url }}."
 msgstr ""
 
-#: includes/Actions/Send_Email_Raw.php:38
+#: includes/Actions/Send_Email_Raw.php:44
 msgid "Include AutomateWoo CSS"
 msgstr ""
 
-#: includes/Actions/Send_Email_Raw.php:40
+#: includes/Actions/Send_Email_Raw.php:46
 msgid "Checking this box adds the basic AutomateWoo CSS that is used to style variables to your custom HTML."
 msgstr ""
 
-#: includes/Actions/Send_Email_Raw.php:44
+#: includes/Actions/Send_Email_Raw.php:50
 msgid "Email HTML"
 msgstr ""
 
-#: includes/Actions/Send_Email_Raw.php:45
+#: includes/Actions/Send_Email_Raw.php:51
 msgid "Any CSS included in the HTML will be automatically inlined."
 msgstr ""
 
@@ -2830,7 +2836,7 @@ msgid "No valid recipients"
 msgstr ""
 
 #: includes/Actions/Send_SMS_Twilio.php:105
-#: includes/Workflow_Email.php:388
+#: includes/Workflow_Email.php:382
 msgid "The recipient is not opted-in to this workflow."
 msgstr ""
 
@@ -4808,7 +4814,7 @@ msgstr ""
 msgid "Customer - Account Created Date"
 msgstr ""
 
-#: includes/Rules/Customer_Active_Membership_Plans.php:24
+#: includes/Rules/Customer_Active_Membership_Plans.php:36
 msgid "Customer - Active Memberships Plans"
 msgstr ""
 
@@ -5579,15 +5585,15 @@ msgstr ""
 msgid "Select files here to have this workflow trigger only for those specific items. Leave blank to run for all downloadable files of the selected product."
 msgstr ""
 
-#: includes/Triggers/Abstract_Memberships.php:18
+#: includes/Triggers/Abstract_Memberships.php:22
 msgid "Memberships"
 msgstr ""
 
-#: includes/Triggers/Abstract_Memberships.php:31
+#: includes/Triggers/Abstract_Memberships.php:35
 msgid "Membership plans"
 msgstr ""
 
-#: includes/Triggers/Abstract_Memberships.php:32
+#: includes/Triggers/Abstract_Memberships.php:36
 msgid "Select which membership plans to trigger for. Leave blank to apply for all plans."
 msgstr ""
 
@@ -5608,7 +5614,7 @@ msgid "This trigger fires when a booking status changes. Notice a valid customer
 msgstr ""
 
 #: includes/Triggers/BookingStatusChanged.php:66
-#: includes/Triggers/Membership_Status_Changed.php:38
+#: includes/Triggers/Membership_Status_Changed.php:43
 #: includes/Triggers/Order_Status_Changes.php:29
 #: includes/Triggers/Subscription_Status_Changed.php:44
 msgid "Status changes from"
@@ -5619,7 +5625,7 @@ msgid "Select valid previous booking status values to trigger this workflow. Lea
 msgstr ""
 
 #: includes/Triggers/BookingStatusChanged.php:73
-#: includes/Triggers/Membership_Status_Changed.php:45
+#: includes/Triggers/Membership_Status_Changed.php:50
 #: includes/Triggers/Order_Status_Changes.php:35
 #: includes/Triggers/Subscription_Status_Changed.php:51
 msgid "Status changes to"
@@ -5778,15 +5784,15 @@ msgstr ""
 msgid "Choose which MailChimp for WordPress form this workflow should trigger for."
 msgstr ""
 
-#: includes/Triggers/Membership_Created.php:29
+#: includes/Triggers/Membership_Created.php:36
 msgid "Membership Created"
 msgstr ""
 
-#: includes/Triggers/Membership_Status_Changed.php:25
+#: includes/Triggers/Membership_Status_Changed.php:28
 msgid "Membership Status Changed"
 msgstr ""
 
-#: includes/Triggers/Membership_Status_Changed.php:35
+#: includes/Triggers/Membership_Status_Changed.php:40
 msgid "Leave blank for any status"
 msgstr ""
 
@@ -7460,7 +7466,7 @@ msgctxt "timing option"
 msgid "Checked daily at %s"
 msgstr ""
 
-#: includes/Workflow_Email.php:375
+#: includes/Workflow_Email.php:369
 msgid "Workflow was not defined for email."
 msgstr ""
 

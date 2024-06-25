@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
@@ -23,14 +22,21 @@ class Action_Send_Email_Raw extends Action_Send_Email_Abstract {
 		return 'html-raw';
 	}
 
-	function load_admin_details() {
+	/**
+	 * Method to set the action's admin props.
+	 *
+	 * Admin props include: title, group and description.
+	 */
+	public function load_admin_details() {
 		parent::load_admin_details();
-		$this->title = __( 'Send Email - Raw HTML', 'automatewoo' );
+		$this->title       = __( 'Send Email - Raw HTML', 'automatewoo' );
 		$this->description = __( "This action sends emails with only the HTML/CSS entered in the action's HTML field and is designed for advanced use only. This is different from the standard Send Email action, which inserts the email content into a template. Some variables may display unexpectedly due to the different CSS. Please note that you should include an unsubscribe link by using the variable {{ unsubscribe_url }}.", 'automatewoo' );
 	}
 
-
-	function load_fields() {
+	/**
+	 * Method to load the action's fields.
+	 */
+	public function load_fields() {
 		parent::load_fields();
 
 		$include_aw_css = new Fields\Checkbox();
@@ -54,14 +60,19 @@ class Action_Send_Email_Raw extends Action_Send_Email_Abstract {
 
 	/**
 	 * Generates the HTML content for the email
+	 *
 	 * @return string|\WP_Error
 	 */
 	public function get_preview() {
-		$html = $this->get_option('email_html', true, true );
-		$include_aw_css = $this->get_option('include_aw_css' );
+		$html           = $this->get_option( 'email_html', true, true );
+		$include_aw_css = $this->get_option( 'include_aw_css' );
 
 		$current_user = wp_get_current_user();
-		wp_set_current_user( 0 ); // no user should be logged in
+		// no user should be logged in
+		// When the user_id value is 0, it's a session for a logged-out user
+		// see https://wordpress.org/support/topic/sessions-with-user-id-0/
+		// phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
+		wp_set_current_user( 0 );
 
 		return $this->get_workflow_email_object( $current_user->get( 'user_email' ), $html )
 			->set_include_automatewoo_styles( $include_aw_css )
@@ -98,8 +109,10 @@ class Action_Send_Email_Raw extends Action_Send_Email_Abstract {
 		return true;
 	}
 
-
-	function run() {
+	/**
+	 * Run the action.
+	 */
+	public function run() {
 		$recipients     = $this->get_option( 'to', true );
 		$html           = $this->get_option( 'email_html', true, true );
 		$include_aw_css = $this->get_option( 'include_aw_css' );
@@ -120,5 +133,4 @@ class Action_Send_Email_Raw extends Action_Send_Email_Abstract {
 			$this->add_send_email_result_to_workflow_log( $sent );
 		}
 	}
-
 }

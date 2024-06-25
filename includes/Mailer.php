@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
@@ -42,17 +41,17 @@ class Mailer extends Mailer_Abstract {
 	 *
 	 * @todo remove params, no longer in use after Refer A Friend 2.3
 	 *
-	 * @param $subject
-	 * @param $email
-	 * @param $content
-	 * @param string $template
+	 * @param string|false $subject
+	 * @param string|false $email
+	 * @param string|false $content
+	 * @param string       $template
 	 */
-	function __construct( $subject = false, $email = false, $content = false, $template = 'default' ) {
+	public function __construct( $subject = false, $email = false, $content = false, $template = 'default' ) {
 
 		// deprecated
-		$this->email = $email;
-		$this->subject = $subject;
-		$this->content = $content;
+		$this->email    = $email;
+		$this->subject  = $subject;
+		$this->content  = $content;
 		$this->template = $template;
 
 		do_action( 'automatewoo/mailer/init' );
@@ -60,9 +59,9 @@ class Mailer extends Mailer_Abstract {
 
 
 	/**
-	 * @param $heading
+	 * @param string $heading
 	 */
-	function set_heading( $heading ) {
+	public function set_heading( $heading ) {
 		$this->heading = $heading;
 	}
 
@@ -70,7 +69,7 @@ class Mailer extends Mailer_Abstract {
 	/**
 	 * @param string $preheader
 	 */
-	function set_preheader( $preheader ) {
+	public function set_preheader( $preheader ) {
 		$this->preheader = $preheader;
 	}
 
@@ -78,19 +77,19 @@ class Mailer extends Mailer_Abstract {
 	/**
 	 * @param string $template
 	 */
-	function set_template( $template ) {
+	public function set_template( $template ) {
 		$this->template = $template;
 
 		// Must reset from props after template is changed.
 		$this->from_email = null;
-		$this->from_name = null;
+		$this->from_name  = null;
 	}
 
 
 	/**
 	 * @param bool $include
 	 */
-	function set_include_automatewoo_styles( $include ) {
+	public function set_include_automatewoo_styles( $include ) {
 		$this->include_automatewoo_styles = $include;
 	}
 
@@ -100,7 +99,7 @@ class Mailer extends Mailer_Abstract {
 	 *
 	 * @return string
 	 */
-	function get_from_email() {
+	public function get_from_email() {
 		if ( ! isset( $this->from_email ) ) {
 			$this->from_email = Emails::get_from_address( $this->template );
 		}
@@ -113,7 +112,7 @@ class Mailer extends Mailer_Abstract {
 	 *
 	 * @return string
 	 */
-	function get_from_name() {
+	public function get_from_name() {
 		if ( ! isset( $this->from_name ) ) {
 			$this->from_name = Emails::get_from_name( $this->template );
 		}
@@ -128,7 +127,7 @@ class Mailer extends Mailer_Abstract {
 	 *
 	 * @return string
 	 */
-	function get_email_body() {
+	public function get_email_body() {
 		$html = $this->get_content_wrapped_in_template();
 		return apply_filters( 'woocommerce_mail_content', $this->prepare_html( $html ) );
 	}
@@ -137,7 +136,7 @@ class Mailer extends Mailer_Abstract {
 	/**
 	 * @return string
 	 */
-	function get_content_wrapped_in_template() {
+	public function get_content_wrapped_in_template() {
 		$content = $this->content;
 
 		add_filter( 'woocommerce_email_footer_text', [ $this, 'add_extra_footer_text' ] );
@@ -150,10 +149,14 @@ class Mailer extends Mailer_Abstract {
 		// Buffer
 		ob_start();
 
-		$this->get_template_part( 'email-header.php', [
-			'email_heading' => $this->heading
-		] );
+		$this->get_template_part(
+			'email-header.php',
+			[
+				'email_heading' => $this->heading,
+			]
+		);
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $content;
 
 		$this->get_template_part( 'email-footer.php' );
@@ -186,7 +189,7 @@ class Mailer extends Mailer_Abstract {
 	 * @param string $html
 	 * @return string
 	 */
-	function prepare_html( $html ) {
+	public function prepare_html( $html ) {
 		if ( $this->preheader ) {
 			$html = $this->inject_preheader( $html );
 		}
@@ -217,7 +220,7 @@ class Mailer extends Mailer_Abstract {
 	 * @param string $html The contents of the email
 	 * @return string
 	 */
-	function fix_wrapper_for_mailpoet( $html ) {
+	public function fix_wrapper_for_mailpoet( $html ) {
 		return str_replace( 'id="wrapper"', 'id="mailpoet_woocommerce_container"', $html );
 	}
 
@@ -228,7 +231,7 @@ class Mailer extends Mailer_Abstract {
 	 * @param string $content
 	 * @return string
 	 */
-	function fix_links_with_double_http( $content ) {
+	public function fix_links_with_double_http( $content ) {
 		$content = str_replace( '"http://http://', '"http://', $content );
 		$content = str_replace( '"https://https://', '"https://', $content );
 		$content = str_replace( '"http://https://', '"https://', $content );
@@ -243,7 +246,7 @@ class Mailer extends Mailer_Abstract {
 	 * @param string|null $content
 	 * @return string
 	 */
-	function style_inline( $content ) {
+	public function style_inline( $content ) {
 		ob_start();
 
 		if ( $this->include_automatewoo_styles ) {
@@ -259,17 +262,18 @@ class Mailer extends Mailer_Abstract {
 
 
 	/**
-	 * @param $text
+	 * @param string $text
 	 * @return string
 	 */
-	function add_extra_footer_text( $text ) {
+	public function add_extra_footer_text( $text ) {
 
-		if ( ! $this->extra_footer_text )
+		if ( ! $this->extra_footer_text ) {
 			return $text;
+		}
 
 		// add separator if there is footer text
 		if ( trim( $text ) ) {
-			$text .= apply_filters( 'automatewoo_email_footer_separator',  ' - ' );
+			$text .= apply_filters( 'automatewoo_email_footer_separator', ' - ' );
 		}
 
 		$text .= $this->extra_footer_text;
@@ -285,7 +289,7 @@ class Mailer extends Mailer_Abstract {
 	 * @param array  $variables Array of variables for use in the template file.
 	 */
 	public function get_template_part( $file_name, $variables = [] ) {
-		switch( $this->template ) {
+		switch ( $this->template ) {
 
 			// default is the woocommerce template
 			case 'default':
@@ -307,7 +311,7 @@ class Mailer extends Mailer_Abstract {
 				if ( is_array( $template_data ) && isset( $template_data['path'] ) ) {
 					$template_path = untrailingslashit( $template_data['path'] );
 				} else {
-					$template_path = 'automatewoo/custom-email-templates/'. $this->template;
+					$template_path = 'automatewoo/custom-email-templates/' . $this->template;
 				}
 				break;
 		}
@@ -345,6 +349,7 @@ class Mailer extends Mailer_Abstract {
 	 */
 	public function load_template_part( $_template_file, $_variables ) {
 		if ( is_array( $_variables ) ) {
+			// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 			extract( $_variables, EXTR_SKIP );
 		}
 
@@ -356,10 +361,10 @@ class Mailer extends Mailer_Abstract {
 	/**
 	 * Maybe replace URLs with trackable URLs
 	 *
-	 * @param $content string
+	 * @param string $content
 	 * @return string
 	 */
-	function replace_urls_in_content( $content ) {
+	public function replace_urls_in_content( $content ) {
 		if ( ! $this->replace_content_urls_callback ) {
 			return $content;
 		}
@@ -372,34 +377,44 @@ class Mailer extends Mailer_Abstract {
 	/**
 	 * Injects preheader HTML after opening <body> tag
 	 *
-	 * @param $html
+	 * @param string $html
 	 * @return string
 	 */
-	function inject_preheader( $html ) {
-		return preg_replace_callback( "/<body[^>]*>/", function( $matches ) {
-			$preheader = '<div class="automatewoo-email-preheader" style="display: none !important; font-size: 1px;">' . esc_html( $this->preheader ) . '</div>';
-			return $matches[0] . $preheader;
-		}, $html, 1 );
+	public function inject_preheader( $html ) {
+		return preg_replace_callback(
+			'/<body[^>]*>/',
+			function ( $matches ) {
+				$preheader = '<div class="automatewoo-email-preheader" style="display: none !important; font-size: 1px;">' . esc_html( $this->preheader ) . '</div>';
+				return $matches[0] . $preheader;
+			},
+			$html,
+			1
+		);
 	}
 
 
 	/**
 	 * Injects tracking pixel before closing </body> tag
 	 *
-	 * @param $html
+	 * @param string $html
 	 * @return string
 	 */
-	function inject_tracking_pixel( $html ) {
-		return preg_replace_callback( "/<\/body[^>]*>/", function( $matches ) {
-			return $this->get_tracking_pixel_img() . $matches[0] ;
-		}, $html, 1 );
+	public function inject_tracking_pixel( $html ) {
+		return preg_replace_callback(
+			'/<\/body[^>]*>/',
+			function ( $matches ) {
+				return $this->get_tracking_pixel_img() . $matches[0];
+			},
+			$html,
+			1
+		);
 	}
 
 
 	/**
 	 * @return string
 	 */
-	function get_tracking_pixel_img() {
+	public function get_tracking_pixel_img() {
 		return '<img src="' . esc_url( $this->tracking_pixel_url ) . '" height="1" width="1" alt="" style="display:inline">';
 	}
 
@@ -457,5 +472,4 @@ class Mailer extends Mailer_Abstract {
 
 		return $html;
 	}
-
 }

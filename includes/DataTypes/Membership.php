@@ -1,12 +1,13 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo\DataTypes;
 
 use AutomateWoo\Clean;
 use AutomateWoo\Integrations;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Membership data type class.
@@ -16,10 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Membership extends AbstractDataType {
 
 	/**
-	 * @param $item
+	 * Check if the item is a WC_Memberships_User_Membership
+	 *
+	 * @param mixed $item
+	 *
 	 * @return bool
 	 */
-	function validate( $item ) {
+	public function validate( $item ) {
 		return is_a( $item, 'WC_Memberships_User_Membership' );
 	}
 
@@ -28,17 +32,20 @@ class Membership extends AbstractDataType {
 	 * @param \WC_Memberships_User_Membership $item
 	 * @return mixed
 	 */
-	function compress( $item ) {
+	public function compress( $item ) {
 		return $item->get_id();
 	}
 
 
 	/**
-	 * @param $compressed_item
-	 * @param $compressed_data_layer
+	 * Get the full item from its stored format.
+	 *
+	 * @param int|string|null $compressed_item
+	 * @param array           $compressed_data_layer
+	 *
 	 * @return mixed
 	 */
-	function decompress( $compressed_item, $compressed_data_layer ) {
+	public function decompress( $compressed_item, $compressed_data_layer ) {
 		$id = Clean::id( $compressed_item );
 
 		if ( ! Integrations::is_memberships_enabled() || ! $id ) {
@@ -53,5 +60,4 @@ class Membership extends AbstractDataType {
 
 		return $membership;
 	}
-
 }

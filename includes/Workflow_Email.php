@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
@@ -120,7 +119,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_recipient( $recipient ) {
+	public function set_recipient( $recipient ) {
 		$this->recipient = $recipient;
 
 		return $this;
@@ -132,7 +131,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_subject( $subject ) {
+	public function set_subject( $subject ) {
 		$this->subject = $subject;
 
 		return $this;
@@ -148,7 +147,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_content( $content ) {
+	public function set_content( $content ) {
 		$this->content = $content;
 
 		return $this;
@@ -160,7 +159,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_heading( $heading ) {
+	public function set_heading( $heading ) {
 		$this->heading = $heading;
 
 		return $this;
@@ -172,7 +171,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_preheader( $preheader ) {
+	public function set_preheader( $preheader ) {
 		$this->preheader = $preheader;
 
 		return $this;
@@ -184,7 +183,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_template( $template ) {
+	public function set_template( $template ) {
 		$this->template = $template;
 
 		return $this;
@@ -196,7 +195,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_tracking_enabled( $enabled ) {
+	public function set_tracking_enabled( $enabled ) {
 		$this->tracking_enabled = $enabled;
 
 		return $this;
@@ -208,7 +207,7 @@ class Workflow_Email {
 	 *
 	 * @return $this
 	 */
-	function set_include_automatewoo_styles( $include ) {
+	public function set_include_automatewoo_styles( $include ) {
 		$this->include_automatewoo_styles = $include;
 
 		return $this;
@@ -233,17 +232,15 @@ class Workflow_Email {
 	/**
 	 * @return Mailer|Mailer_Raw_HTML|Mailer_Plain_Text
 	 */
-	function get_mailer() {
+	public function get_mailer() {
 
 		if ( $this->is_type( 'plain-text' ) ) {
 			$mailer = new Mailer_Plain_Text();
 			$mailer->set_content( $this->get_content_with_appended_plain_text_footer() );
-		}
-		else {
+		} else {
 			if ( $this->is_type( 'html-raw' ) ) {
 				$mailer = new Mailer_Raw_HTML();
-			}
-			else {
+			} else {
 				$mailer = new Mailer();
 				$mailer->set_template( $this->template );
 				$mailer->set_heading( $this->heading );
@@ -258,7 +255,7 @@ class Workflow_Email {
 			$mailer->set_include_automatewoo_styles( $this->include_automatewoo_styles );
 
 			if ( $this->tracking_enabled ) {
-				$mailer->tracking_pixel_url = Tracking::get_open_tracking_url( $this->workflow );
+				$mailer->tracking_pixel_url            = Tracking::get_open_tracking_url( $this->workflow );
 				$mailer->replace_content_urls_callback = [ $this, 'replace_content_urls_callback' ];
 			}
 		}
@@ -276,8 +273,8 @@ class Workflow_Email {
 	 *
 	 * @return bool|string
 	 */
-	function get_unsubscribe_link() {
-		$url = $this->get_unsubscribe_url();
+	public function get_unsubscribe_link() {
+		$url  = $this->get_unsubscribe_url();
 		$text = $this->get_unsubscribe_text();
 
 		if ( ! $url || ! $text ) {
@@ -294,7 +291,7 @@ class Workflow_Email {
 	 *
 	 * @return bool|string
 	 */
-	function get_unsubscribe_url() {
+	public function get_unsubscribe_url() {
 		$customer = Customer_Factory::get_by_email( $this->recipient );
 		return $this->workflow->get_unsubscribe_url( $customer );
 	}
@@ -306,7 +303,7 @@ class Workflow_Email {
 	 *
 	 * @return string
 	 */
-	function get_unsubscribe_text() {
+	public function get_unsubscribe_text() {
 		return apply_filters( 'automatewoo_email_unsubscribe_text', __( 'Unsubscribe', 'automatewoo' ), $this, $this->workflow );
 	}
 
@@ -319,8 +316,8 @@ class Workflow_Email {
 	 *
 	 * @return bool|string
 	 */
-	function get_plain_text_unsubscribe_footer() {
-		$url = $this->get_unsubscribe_url();
+	public function get_plain_text_unsubscribe_footer() {
+		$url  = $this->get_unsubscribe_url();
 		$text = $this->get_unsubscribe_text();
 
 		if ( ! $url || ! $text ) {
@@ -337,7 +334,7 @@ class Workflow_Email {
 	 *
 	 * @return string
 	 */
-	function get_content_with_appended_plain_text_footer() {
+	public function get_content_with_appended_plain_text_footer() {
 		$footer = $this->get_plain_text_unsubscribe_footer();
 		if ( $footer ) {
 			return $this->content . $footer;
@@ -350,11 +347,8 @@ class Workflow_Email {
 	 * @param string $url
 	 * @return string
 	 */
-	function replace_content_urls_callback( $url ) {
-		if ( strstr( $url, 'aw-action=unsubscribe' ) ) {
-			// don't count unsubscribe clicks
-		}
-		else {
+	public function replace_content_urls_callback( $url ) {
+		if ( ! strstr( $url, 'aw-action=unsubscribe' ) ) {
 			$url = html_entity_decode( $url );
 			$url = $this->workflow->append_ga_tracking_to_url( $url );
 			$url = Tracking::get_click_tracking_url( $this->workflow, $url );
@@ -367,7 +361,7 @@ class Workflow_Email {
 	/**
 	 * @return bool|\WP_Error
 	 */
-	function send() {
+	public function send() {
 
 		$mailer = $this->get_mailer();
 
@@ -385,13 +379,12 @@ class Workflow_Email {
 		$customer = Customer_Factory::get_by_email( $this->recipient );
 
 		if ( $this->workflow->is_customer_unsubscribed( $customer ) ) {
-			return new \WP_Error( 'email_unsubscribed', __( "The recipient is not opted-in to this workflow.", 'automatewoo' ) );
+			return new \WP_Error( 'email_unsubscribed', __( 'The recipient is not opted-in to this workflow.', 'automatewoo' ) );
 		}
 
 		if ( ! $this->workflow->is_transactional() ) {
 			$mailer->set_one_click_unsubscribe( Frontend::get_communication_page_permalink( $customer, 'unsubscribe' ) );
 		}
-
 
 		\AW_Mailer_API::setup( $mailer, $this->workflow );
 
@@ -408,12 +401,11 @@ class Workflow_Email {
 	 *
 	 * @return string
 	 */
-	function get_email_body() {
+	public function get_email_body() {
 		$mailer = $this->get_mailer();
 		\AW_Mailer_API::setup( $mailer, $this->workflow );
 		$html = $mailer->get_email_body();
 		\AW_Mailer_API::cleanup();
 		return $html;
 	}
-
 }

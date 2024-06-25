@@ -1,9 +1,9 @@
 <?php
-// phpcs:ignoreFile
-
 namespace AutomateWoo;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @class Action_Memberships_Delete_User_Membership
@@ -11,16 +11,28 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class Action_Memberships_Delete_User_Membership extends Action_Memberships_Abstract {
 
+	/**
+	 * The data items required by the action.
+	 *
+	 * @var array
+	 */
 	public $required_data_items = [ 'customer' ];
 
 
-	function load_admin_details() {
+	/**
+	 * Method to set the action's admin props.
+	 *
+	 * Admin props include: title, group and description.
+	 */
+	public function load_admin_details() {
 		parent::load_admin_details();
-		$this->title = __( "Delete Membership For User", 'automatewoo' );
+		$this->title = __( 'Delete Membership For User', 'automatewoo' );
 	}
 
-
-	function load_fields() {
+	/**
+	 * Method to load the action's fields.
+	 */
+	public function load_fields() {
 
 		$plans = Memberships_Helper::get_membership_plans();
 
@@ -31,17 +43,18 @@ class Action_Memberships_Delete_User_Membership extends Action_Memberships_Abstr
 			->set_required();
 
 		$this->add_field( $plan );
-
 	}
 
 
 	/**
-	 * @throws \Exception
+	 * Run the action
+	 *
+	 * @throws \Exception When an error happens.
 	 */
-	function run() {
+	public function run() {
 
 		$customer = $this->workflow->data_layer()->get_customer();
-		$plan_id = absint( $this->get_option( 'plan' ) );
+		$plan_id  = absint( $this->get_option( 'plan' ) );
 
 		if ( ! $customer->is_registered() || ! $plan_id ) {
 			return;
@@ -59,11 +72,11 @@ class Action_Memberships_Delete_User_Membership extends Action_Memberships_Abstr
 		$success = wp_delete_post( $membership_id, true );
 
 		if ( $success ) {
+			// translators: The Membership ID
 			$this->workflow->log_action_note( $this, sprintf( __( 'Deleted membership #%s', 'automatewoo' ), $membership_id ) );
-		}
-		else {
-			throw new \Exception( sprintf( __( 'Failed deleting membership #%s', 'automatewoo' ), $membership_id ) );
+		} else {
+			// translators: The Membership ID
+			throw new \Exception( esc_textarea( sprintf( __( 'Failed deleting membership #%s', 'automatewoo' ), $membership_id ) ) );
 		}
 	}
-
 }

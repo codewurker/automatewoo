@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
@@ -18,7 +17,7 @@ class Mailer_Raw_HTML extends Mailer {
 	 * @param string|null $content
 	 * @return string
 	 */
-	function style_inline( $content ) {
+	public function style_inline( $content ) {
 		$css = '';
 
 		if ( $this->include_automatewoo_styles ) {
@@ -27,7 +26,7 @@ class Mailer_Raw_HTML extends Mailer {
 			$css = ob_get_clean();
 		}
 
-		$css = apply_filters( 'automatewoo/mailer_raw/styles', $css , $this );
+		$css = apply_filters( 'automatewoo/mailer_raw/styles', $css, $this );
 
 		return $this->emogrify( $content, $css, true );
 	}
@@ -36,9 +35,8 @@ class Mailer_Raw_HTML extends Mailer {
 	/**
 	 * @return string
 	 */
-	function get_email_body() {
+	public function get_email_body() {
 		$html = $this->content;
 		return $this->prepare_html( $html );
 	}
-
 }

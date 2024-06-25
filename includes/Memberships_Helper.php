@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 
 namespace AutomateWoo;
 
@@ -12,10 +11,10 @@ class Memberships_Helper {
 	/**
 	 * @return array
 	 */
-	static function get_membership_plans() {
+	public static function get_membership_plans() {
 		$options = [];
 
-		foreach( wc_memberships_get_membership_plans() as $plan ) {
+		foreach ( wc_memberships_get_membership_plans() as $plan ) {
 			$options[ $plan->get_id() ] = $plan->get_name();
 		}
 
@@ -25,17 +24,17 @@ class Memberships_Helper {
 
 	/**
 	 * Get statuses without status prefix
+	 *
 	 * @return array
 	 */
-	static function get_membership_statuses() {
+	public static function get_membership_statuses() {
 		$statuses = [];
 
 		foreach ( wc_memberships_get_user_membership_statuses() as $status => $value ) {
-			$status = 0 === strpos( $status, 'wcm-' ) ? substr( $status, 4 ) : $status;
+			$status              = 0 === strpos( $status, 'wcm-' ) ? substr( $status, 4 ) : $status;
 			$statuses[ $status ] = $value['label'];
 		}
 
 		return $statuses;
 	}
-
 }
