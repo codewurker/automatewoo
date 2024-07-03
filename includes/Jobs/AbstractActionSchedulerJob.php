@@ -67,6 +67,12 @@ abstract class AbstractActionSchedulerJob implements ActionSchedulerJobInterface
 	 */
 	public function schedule_recurring() {
 		$interval = apply_filters( "automatewoo/intervals/{$this->get_name()}", $this->get_interval() );
+
+		if ( ! $this->is_enabled() ) {
+			$this->cancel_recurring();
+			return;
+		}
+
 		if ( ! $this->get_schedule() ) {
 			$this->action_scheduler->schedule_recurring_action(
 				time() + $interval,
@@ -95,5 +101,17 @@ abstract class AbstractActionSchedulerJob implements ActionSchedulerJobInterface
 	 */
 	public function get_schedule() {
 		return $this->action_scheduler->next_scheduled_action( $this->get_schedule_hook() );
+	}
+
+	/**
+	 * If a child class replaces this method and returns `false` then any existing
+	 * scheduled recurring actions will be cancelled and no more will be scheduled.
+	 *
+	 * @since 6.0.28
+	 *
+	 * @return bool
+	 */
+	public function is_enabled(): bool {
+		return true;
 	}
 }

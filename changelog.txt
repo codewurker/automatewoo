@@ -1,5 +1,9 @@
 *** AutomateWoo Changelog ***
 
+2024-07-02 - version 6.0.28
+* Tweak - Hide active carts and guests captured widgets if cart tracking is disabled.
+* Tweak - Remove unused scheduled actions and prevent further actions from being scheduled if job is disabled.
+
 2024-06-25 - version 6.0.27
 * Dev - PHPCS for Memberships.
 * Dev - PHPCS for Send Email actions.

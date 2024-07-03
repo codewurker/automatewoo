@@ -9,6 +9,7 @@ use AutomateWoo\Cart_Query;
 use AutomateWoo\DateTime;
 use AutomateWoo\Jobs\Traits\ValidateItemAsIntegerId;
 use AutomateWoo\OptionsStore;
+use AutomateWoo\Options;
 use Exception;
 
 defined( 'ABSPATH' ) || exit;
@@ -128,5 +129,17 @@ class AbandonedCarts extends AbstractRecurringBatchedActionSchedulerJob {
 	 */
 	public function get_interval(): int {
 		return JobService::TWO_MINUTE_INTERVAL;
+	}
+
+	/**
+	 * If cart tracking is not enabled then disable the job to prevent
+	 * recurring actions from being scheduled.
+	 *
+	 * @since 6.0.28
+	 *
+	 * @return bool
+	 */
+	public function is_enabled(): bool {
+		return Options::abandoned_cart_enabled();
 	}
 }

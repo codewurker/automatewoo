@@ -29,8 +29,6 @@ class Dashboard_Widget_Key_Figures extends Dashboard_Widget {
 		}
 
 		$optins_count = $this->controller->get_optins_count();
-		$carts_count  = $this->controller->get_active_carts_count();
-		$guests_count = $this->controller->get_guests_count();
 		$queued_count = $this->controller->get_queued_count();
 
 		$figures[] = [
@@ -39,17 +37,22 @@ class Dashboard_Widget_Key_Figures extends Dashboard_Widget {
 			'link'  => Admin::page_url( 'queue' ),
 		];
 
-		$figures[] = [
-			'name'  => __( 'active carts', 'automatewoo' ),
-			'value' => $carts_count,
-			'link'  => Admin::page_url( 'carts' ),
-		];
+		if ( Options::abandoned_cart_enabled() ) {
+			$carts_count  = $this->controller->get_active_carts_count();
+			$guests_count = $this->controller->get_guests_count();
 
-		$figures[] = [
-			'name'  => __( 'guests captured', 'automatewoo' ),
-			'value' => $guests_count,
-			'link'  => Admin::page_url( 'guests' ),
-		];
+			$figures[] = [
+				'name'  => __( 'active carts', 'automatewoo' ),
+				'value' => $carts_count,
+				'link'  => Admin::page_url( 'carts' ),
+			];
+
+			$figures[] = [
+				'name'  => __( 'guests captured', 'automatewoo' ),
+				'value' => $guests_count,
+				'link'  => Admin::page_url( 'guests' ),
+			];
+		}
 
 		$figures[] = [
 			'name'  => Options::optin_enabled() ? __( 'opt-ins', 'automatewoo' ) : __( 'opt-outs', 'automatewoo' ),

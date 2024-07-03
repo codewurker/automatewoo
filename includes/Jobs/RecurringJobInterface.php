@@ -41,4 +41,11 @@ interface RecurringJobInterface extends JobInterface {
 	 * Get the next scheduled job
 	 */
 	public function get_schedule();
+
+	/**
+	 * Determine if the job is enabled
+	 *
+	 * @since 6.0.28
+	 */
+	public function is_enabled();
 }

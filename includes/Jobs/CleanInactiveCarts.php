@@ -3,6 +3,7 @@
 namespace AutomateWoo\Jobs;
 
 use AutomateWoo\Carts;
+use AutomateWoo\Options;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -40,5 +41,17 @@ class CleanInactiveCarts extends AbstractRecurringOneTimeActionSchedulerJob {
 	 */
 	public function get_interval() {
 		return JobService::TWO_DAY_INTERVAL;
+	}
+
+	/**
+	 * If cart tracking is not enabled then disable the job to prevent
+	 * recurring actions from being scheduled.
+	 *
+	 * @since 6.0.28
+	 *
+	 * @return bool
+	 */
+	public function is_enabled(): bool {
+		return Options::abandoned_cart_enabled();
 	}
 }
