@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: AutomateWoo 6.0.28\n"
+"Project-Id-Version: AutomateWoo 6.0.29\n"
 "Report-Msgid-Bugs-To: https://woocommerce.com/my-account/contact-support/\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-02T04:39:56+00:00\n"
+"POT-Creation-Date: 2024-07-09T17:24:14+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: automatewoo\n"
@@ -2628,6 +2628,7 @@ msgid "Please note that email tracking is not currently supported on this action
 msgstr ""
 
 #: includes/Actions/Order_Resend_Email.php:60
+#: includes/Rules/Order_Created_Via.php:41
 msgid "Admin"
 msgstr ""
 
@@ -3899,7 +3900,6 @@ msgid_plural "Disabled <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#. translators: placeholder is previous workflow title
 #: includes/Post_Types.php:95
 #: includes/Post_Types.php:98
 #: includes/Post_Types.php:101
@@ -3939,7 +3939,6 @@ msgctxt "used in \"Workflow scheduled for <date>\""
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#. translators: php date string, see http://php.net/date
 #: includes/Post_Types.php:106
 msgid "Workflow draft updated."
 msgstr ""
@@ -4994,10 +4993,14 @@ msgid "Checkout"
 msgstr ""
 
 #: includes/Rules/Order_Created_Via.php:39
+msgid "Store API (Checkout Block)"
+msgstr ""
+
+#: includes/Rules/Order_Created_Via.php:40
 msgid "REST API"
 msgstr ""
 
-#: includes/Rules/Order_Created_Via.php:43
+#: includes/Rules/Order_Created_Via.php:45
 msgid "WooCommerce Deposits"
 msgstr ""
 

@@ -35,8 +35,10 @@ class Order_Created_Via extends Preloaded_Select_Rule_Abstract implements QuickF
 	 */
 	public function load_select_choices() {
 		$options = [
-			'checkout' => __( 'Checkout', 'automatewoo' ),
-			'rest-api' => __( 'REST API', 'automatewoo' ),
+			'checkout'  => __( 'Checkout', 'automatewoo' ),
+			'store-api' => __( 'Store API (Checkout Block)', 'automatewoo' ),
+			'rest-api'  => __( 'REST API', 'automatewoo' ),
+			'admin'     => __( 'Admin', 'automatewoo' ),
 		];
 
 		if ( Integrations::is_deposits_active() ) {

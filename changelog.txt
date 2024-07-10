@@ -1,5 +1,11 @@
 *** AutomateWoo Changelog ***
 
+2024-07-09 - version 6.0.29
+* Fix - Make the "Order - Created Via" rule support the Admin and Store API (Checkout Block) options.
+* Fix - Map `@babel/runtime/regenerator` request to `regenerator-runtime` in webpack.
+* Tweak - WC 9.1 compatibility.
+* Tweak - WP 6.6 compatibility.
+
 2024-07-02 - version 6.0.28
 * Tweak - Hide active carts and guests captured widgets if cart tracking is disabled.
 * Tweak - Remove unused scheduled actions and prevent further actions from being scheduled if job is disabled.
