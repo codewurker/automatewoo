@@ -42,7 +42,7 @@ class ActionSchedulerJobsRunning extends AbstractSystemCheck {
 
 		foreach ( $this->jobs as $job ) {
 
-			if ( ! $job instanceof RecurringJobInterface ) {
+			if ( ! $job instanceof RecurringJobInterface || ! $job->is_enabled() ) {
 				continue;
 			}
 

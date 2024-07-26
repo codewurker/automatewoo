@@ -8,6 +8,17 @@ import { useReducer } from '@wordpress/element';
  */
 import { STEP_STATUSES as STATUSES } from '../utils';
 
+const calculateProgressPercentage = ( totalCount, remainingCount ) => {
+	const completedCount = totalCount - remainingCount;
+
+	if ( totalCount === 0 || completedCount === 0 ) {
+		return 0;
+	}
+
+	const progress = Math.round( ( completedCount / totalCount ) * 100 );
+	return progress > 100 ? 100 : progress;
+};
+
 const reducer = ( state, action ) => {
 	switch ( action.type ) {
 		case 'ADD_ITEMS_REQUEST':
@@ -54,15 +65,4 @@ export const useQueueItemsReducer = ( itemsToQueue ) => {
 		itemsToAdd: itemsToQueue,
 		itemsRemaining: itemsToQueue,
 	} );
-};
-
-const calculateProgressPercentage = ( totalCount, remainingCount ) => {
-	const completedCount = totalCount - remainingCount;
-
-	if ( totalCount === 0 || completedCount === 0 ) {
-		return 0;
-	}
-
-	const progress = Math.round( ( completedCount / totalCount ) * 100 );
-	return progress > 100 ? 100 : progress;
 };

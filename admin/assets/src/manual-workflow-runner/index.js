@@ -18,6 +18,20 @@ import { getTotalPossibleResults } from './utils';
 import './index.scss';
 import { TRACKS_PREFIX } from '../settings';
 
+/**
+ * @param {string} primaryDataType
+ * @return {string} The plural name of the data type.
+ */
+const getDataTypePluralName = ( primaryDataType ) => {
+	const names = {
+		order: __( 'orders', 'automatewoo' ),
+		subscription: __( 'subscriptions', 'automatewoo' ),
+	};
+	return names.hasOwnProperty( primaryDataType )
+		? names[ primaryDataType ]
+		: __( 'items', 'automatewoo' );
+};
+
 const ManualWorkflowRunner = ( { query } ) => {
 	const [ workflow, setWorkflow ] = useState( {} );
 	const [ quickFilterData, setQuickFilterData ] = useState( false );
@@ -121,20 +135,6 @@ const ManualWorkflowRunner = ( { query } ) => {
 		);
 		setCurrentStep( 'select' );
 		setFoundItems( {} );
-	};
-
-	/**
-	 * @param {string} primaryDataType
-	 * @return {string} The plural name of the data type.
-	 */
-	const getDataTypePluralName = ( primaryDataType ) => {
-		const names = {
-			order: __( 'orders', 'automatewoo' ),
-			subscription: __( 'subscriptions', 'automatewoo' ),
-		};
-		return names.hasOwnProperty( primaryDataType )
-			? names[ primaryDataType ]
-			: __( 'items', 'automatewoo' );
 	};
 
 	const findItemsStepContent = () => {

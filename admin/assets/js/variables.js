@@ -39,20 +39,19 @@ jQuery( function ( $ ) {
 						'#aw_workflow_variable_preview_field'
 					).text();
 
-					$( '.aw-workflow-variable-parameter' ).each( function (
-						i,
-						field
-					) {
-						if (
-							$( field ).prop( 'required' ) &&
-							! $( field ).get( 0 ).checkValidity()
-						) {
-							$( field ).get( 0 ).reportValidity();
-							text = false;
+					$( '.aw-workflow-variable-parameter' ).each(
+						function ( i, field ) {
+							if (
+								$( field ).prop( 'required' ) &&
+								! $( field ).get( 0 ).checkValidity()
+							) {
+								$( field ).get( 0 ).reportValidity();
+								text = false;
 
-							return false;
+								return false;
+							}
 						}
-					} );
+					);
 
 					return text;
 				},
@@ -171,7 +170,9 @@ jQuery( function ( $ ) {
 		restrict_parameter_chars( event ) {
 			const restricted = [ 39, 123, 124, 125 ];
 
-			if ( $.inArray( event.which, restricted ) !== -1 ) return false;
+			if ( $.inArray( event.which, restricted ) !== -1 ) {
+				return false;
+			}
 		},
 	};
 

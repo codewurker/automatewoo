@@ -56,29 +56,29 @@ export class ReportChart extends Component {
 
 	getItemChartData() {
 		const { primaryData, selectedChart } = this.props;
-		const chartData = primaryData.data.intervals.map( function (
-			interval
-		) {
-			const intervalData = {};
-			interval.subtotals.segments.forEach( function ( segment ) {
-				if ( segment.segment_label ) {
-					const label = intervalData[ segment.segment_label ]
-						? segment.segment_label +
-						  ' (#' +
-						  segment.segment_id +
-						  ')'
-						: segment.segment_label;
-					intervalData[ segment.segment_id ] = {
-						label,
-						value: segment.subtotals[ selectedChart.key ] || 0,
-					};
-				}
-			} );
-			return {
-				date: formatDate( 'Y-m-d\\TH:i:s', interval.date_start ),
-				...intervalData,
-			};
-		} );
+		const chartData = primaryData.data.intervals.map(
+			function ( interval ) {
+				const intervalData = {};
+				interval.subtotals.segments.forEach( function ( segment ) {
+					if ( segment.segment_label ) {
+						const label = intervalData[ segment.segment_label ]
+							? segment.segment_label +
+							  ' (#' +
+							  segment.segment_id +
+							  ')'
+							: segment.segment_label;
+						intervalData[ segment.segment_id ] = {
+							label,
+							value: segment.subtotals[ selectedChart.key ] || 0,
+						};
+					}
+				} );
+				return {
+					date: formatDate( 'Y-m-d\\TH:i:s', interval.date_start ),
+					...intervalData,
+				};
+			}
+		);
 		return chartData;
 	}
 
@@ -95,38 +95,39 @@ export class ReportChart extends Component {
 			query,
 			defaultDateRange
 		);
-		const chartData = primaryData.data.intervals.map( function (
-			interval,
-			index
-		) {
-			const secondaryDate = getPreviousDate(
-				interval.date_start,
-				primary.after,
-				secondary.after,
-				query.compare,
-				currentInterval
-			);
+		const chartData = primaryData.data.intervals.map(
+			function ( interval, index ) {
+				const secondaryDate = getPreviousDate(
+					interval.date_start,
+					primary.after,
+					secondary.after,
+					query.compare,
+					currentInterval
+				);
 
-			const secondaryInterval = secondaryData.data.intervals[ index ];
-			return {
-				date: formatDate( 'Y-m-d\\TH:i:s', interval.date_start ),
-				primary: {
-					label: `${ primary.label } (${ primary.range })`,
-					labelDate: interval.date_start,
-					value: interval.subtotals[ selectedChart.key ] || 0,
-				},
-				secondary: {
-					label: `${ secondary.label } (${ secondary.range })`,
-					labelDate: secondaryDate.format( 'YYYY-MM-DD HH:mm:ss' ),
-					value:
-						( secondaryInterval &&
-							secondaryInterval.subtotals[
-								selectedChart.key
-							] ) ||
-						0,
-				},
-			};
-		} );
+				const secondaryInterval = secondaryData.data.intervals[ index ];
+				return {
+					date: formatDate( 'Y-m-d\\TH:i:s', interval.date_start ),
+					primary: {
+						label: `${ primary.label } (${ primary.range })`,
+						labelDate: interval.date_start,
+						value: interval.subtotals[ selectedChart.key ] || 0,
+					},
+					secondary: {
+						label: `${ secondary.label } (${ secondary.range })`,
+						labelDate: secondaryDate.format(
+							'YYYY-MM-DD HH:mm:ss'
+						),
+						value:
+							( secondaryInterval &&
+								secondaryInterval.subtotals[
+									selectedChart.key
+								] ) ||
+							0,
+					},
+				};
+			}
+		);
 
 		return chartData;
 	}

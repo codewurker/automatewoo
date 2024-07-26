@@ -18,10 +18,16 @@ window.AutomateWoo = AutomateWoo;
 		AW.initWorkflowStatusSwitch();
 		AW.initShowHide();
 		AW.initHoverableDates();
+		AW.initBeforeAfterDayField();
 
 		$( document.body ).on( 'wc-enhanced-select-init', function () {
 			AW.initEnhancedSelects();
 		} );
+
+		$( document.body ).on(
+			'automatewoo_trigger_changed',
+			AW.initBeforeAfterDayField
+		);
 	};
 
 	/**
@@ -93,11 +99,30 @@ window.AutomateWoo = AutomateWoo;
 			} );
 	};
 
+	AW.initBeforeAfterDayField = function () {
+		$( '.automatewoo-before-after-day-field-group__field--type' )
+			.on( 'change', function () {
+				const $type = $( this );
+				const $days = $type.siblings(
+					'.automatewoo-before-after-day-field-group__field--days'
+				);
+
+				if ( $type.val() === 'on_the_day' ) {
+					$days.hide();
+				} else {
+					$days.show();
+				}
+			} )
+			.trigger( 'change' );
+	};
+
 	AW.initWorkflowStatusSwitch = function () {
 		$( '.aw-switch.js-toggle-workflow-status' ).on( 'click', function () {
 			const $switch = $( this );
 
-			if ( $switch.is( '.aw-loading' ) ) return;
+			if ( $switch.is( '.aw-loading' ) ) {
+				return;
+			}
 
 			const state = $switch.attr( 'data-aw-switch' );
 			const newState = state === 'on' ? 'off' : 'on';
@@ -270,7 +295,9 @@ jQuery( function ( $ ) {
 
 		notices: {
 			success( message, $location ) {
-				if ( ! $location.length ) return;
+				if ( ! $location.length ) {
+					return;
+				}
 				$location.before(
 					'<div class="automatewoo-notice updated fade"><p><strong>' +
 						message +
@@ -279,7 +306,9 @@ jQuery( function ( $ ) {
 			},
 
 			error( message, $location ) {
-				if ( ! $location.length ) return;
+				if ( ! $location.length ) {
+					return;
+				}
 				$location.before(
 					'<div class="automatewoo-notice error fade"><p><strong>' +
 						message +
@@ -382,19 +411,4 @@ jQuery( function ( $ ) {
 	} );
 
 	AutomateWoo.init();
-
-	$( '.automatewoo-before-after-day-field-group__field--type' )
-		.on( 'change', function () {
-			const $type = $( this );
-			const $days = $type.siblings(
-				'.automatewoo-before-after-day-field-group__field--days'
-			);
-
-			if ( $type.val() === 'on_the_day' ) {
-				$days.hide();
-			} else {
-				$days.show();
-			}
-		} )
-		.trigger( 'change' );
 } );

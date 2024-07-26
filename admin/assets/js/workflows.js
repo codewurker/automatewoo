@@ -375,10 +375,9 @@
 
 		initialize( data ) {
 			this.data = data;
-			const modalView = this;
 
-			this.$el.on( 'click', '.js-confirm', function () {
-				modalView.disableButtons();
+			this.$el.on( 'click', '.js-confirm', () => {
+				this.disableButtons();
 
 				// Close with applicable tracking action set up.
 				data.action = 'confirm';
@@ -393,10 +392,10 @@
 			this.$el.on(
 				'click',
 				`.${ AutomateWoo.Modal.triggerClasses.close }`,
-				function () {
+				() => {
 					data.action = 'cancel';
 
-					modalView.disableButtons();
+					this.disableButtons();
 				}
 			);
 		},
@@ -606,55 +605,59 @@ jQuery( function ( $ ) {
 			if ( triggerName ) {
 				AutomateWoo.Workflows.$triggers_box.addClass( 'aw-loading' );
 
-				this.fetch_trigger_data( triggerName ).done( function (
-					response
-				) {
-					if ( ! response.success ) {
-						return;
-					}
+				this.fetch_trigger_data( triggerName ).done(
+					function ( response ) {
+						if ( ! response.success ) {
+							return;
+						}
 
-					AutomateWoo.Workflows.$triggers_box
-						.find( 'tbody' )
-						.append( response.data.fields );
-					AutomateWoo.Workflows.$triggers_box.removeClass(
-						'aw-loading'
-					);
+						AutomateWoo.Workflows.$triggers_box
+							.find( 'tbody' )
+							.append( response.data.fields );
+						AutomateWoo.Workflows.$triggers_box.removeClass(
+							'aw-loading'
+						);
 
-					if ( restoreOptions ) {
-						const options = AW.workflow.get( 'prevTriggerOptions' );
+						if ( restoreOptions ) {
+							const options =
+								AW.workflow.get( 'prevTriggerOptions' );
 
-						$.each( options, function ( index, option ) {
-							const element = $( `[name="${ option.name }"]` );
+							$.each( options, function ( index, option ) {
+								const element = $(
+									`[name="${ option.name }"]`
+								);
 
-							switch ( element.prop( 'type' ) ) {
-								case 'select-one':
-									if (
-										element.find( 'option' ).length === 0
-									) {
-										const selected = $( '<option />' )
-											.attr( 'value', option.value )
-											.text( option.text );
+								switch ( element.prop( 'type' ) ) {
+									case 'select-one':
+										if (
+											element.find( 'option' ).length ===
+											0
+										) {
+											const selected = $( '<option />' )
+												.attr( 'value', option.value )
+												.text( option.text );
 
-										element.append( selected );
-									} else {
+											element.append( selected );
+										} else {
+											element.val( option.value );
+										}
+										break;
+									case 'checkbox':
+										element.prop( 'checked', option.value );
+										break;
+									default:
 										element.val( option.value );
-									}
-									break;
-								case 'checkbox':
-									element.prop( 'checked', option.value );
-									break;
-								default:
-									element.val( option.value );
-									break;
-							}
+										break;
+								}
 
-							element.trigger( 'change' );
-						} );
+								element.trigger( 'change' );
+							} );
+						}
+
+						AW.workflow.set( 'trigger', response.data.trigger );
+						AW.workflowView.initTrigger();
 					}
-
-					AW.workflow.set( 'trigger', response.data.trigger );
-					AW.workflowView.initTrigger();
-				} );
+				);
 			} else {
 				AW.workflow.set( 'trigger', false );
 			}
@@ -686,18 +689,18 @@ jQuery( function ( $ ) {
 			if ( triggerName ) {
 				$metabox.addClass( 'aw-loading' );
 
-				this.fetch_trigger_data( triggerName ).done( function (
-					response
-				) {
-					if ( ! response.success ) {
-						return;
+				this.fetch_trigger_data( triggerName ).done(
+					function ( response ) {
+						if ( ! response.success ) {
+							return;
+						}
+
+						$metabox.find( 'tbody' ).append( response.data.fields );
+						$metabox.removeClass( 'aw-loading' );
+
+						AW.workflow.set( 'trigger', response.data.trigger );
 					}
-
-					$metabox.find( 'tbody' ).append( response.data.fields );
-					$metabox.removeClass( 'aw-loading' );
-
-					AW.workflow.set( 'trigger', response.data.trigger );
-				} );
+				);
 			} else {
 				AW.workflow.set( 'trigger', false );
 			}
@@ -1088,8 +1091,9 @@ jQuery( function ( $ ) {
 			if (
 				typeof tinymce === 'undefined' ||
 				typeof tinyMCEPreInit.mceInit.automatewoo_editor === 'undefined'
-			)
+			) {
 				return;
+			}
 
 			const mceInit = $.extend(
 				{},

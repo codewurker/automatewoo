@@ -66,7 +66,7 @@ class Admin_Workflow_List {
 		switch ( $column ) {
 
 			case 'timing':
-				echo esc_attr( $this->get_timing_text( $workflow ) );
+				echo wp_kses( $this->get_timing_text( $workflow ), array( 'b' => array() ) );
 				break;
 
 			case 'times_run':

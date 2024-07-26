@@ -1,6 +1,6 @@
 // Register eslint ignored glabals - to be revisited.
 // https://github.com/woocommerce/automatewoo/issues/1212
-/* global AutomateWoo, AW, CustomEvent */
+/* global AutomateWoo, AW */
 /**
  * AutomateWoo Modal
  */
@@ -84,7 +84,7 @@ jQuery( function ( $ ) {
 		 *
 		 * @param {string} [closedBy=''] - Identifier for what closed the modal which will be included in the event detail.
 		 *
-		 * @fires awmodal-close on the `document.body`.
+		 * @fires CustomEvent with event name 'awmodal-close' on the `document.body`.
 		 */
 		close( closedBy = '' ) {
 			document.body.classList.remove(

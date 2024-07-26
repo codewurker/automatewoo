@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { recordEvent } from '@woocommerce/tracks';
-import { createRoot, render, unmountComponentAtNode } from '@wordpress/element'; // eslint-disable-line import/named
+import { createRoot, render, unmountComponentAtNode } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -12,21 +12,52 @@ import PageTabs from './page-tabs';
 import PresetsTab from './presets';
 import { TRACKS_PREFIX } from './settings';
 
+/**
+ * Insert root DOM element for tabs root.
+ *
+ * @return {HTMLDivElement} The root element for workflow tabs.
+ */
+const insertTabsRootDomElement = () => {
+	const rootElement = document.createElement( 'div' );
+	rootElement.setAttribute( 'id', 'automatewoo-workflow-tabs-root' );
+	const headerEnd = document.querySelector(
+		'#wpbody-content .wrap > h2.screen-reader-text'
+	);
+	headerEnd.parentNode.insertBefore( rootElement, headerEnd );
+	return rootElement;
+};
+
+const getHash = () => {
+	return window.location.hash.substr( 1 );
+};
+
+/**
+ * Hide WelcomeNotice when we are in Presets tab.
+ */
+const maybeHideWelcomeNotice = () => {
+	const welcomeNotice = document.querySelector(
+		'.automatewoo-welcome-notice'
+	);
+
+	if ( ! welcomeNotice ) {
+		return;
+	}
+
+	if ( getHash() === 'presets' ) {
+		welcomeNotice.style.display = 'none';
+	} else {
+		welcomeNotice.style.display = 'block';
+	}
+};
+
+const recordTracksTabViewEvent = ( tab ) => {
+	recordEvent( TRACKS_PREFIX + 'workflow_tab_view', { tab } );
+};
+
 const loadTabHandler = ( defaultTabName, tabs ) => {
-	/**
-	 * Insert root DOM element for tabs root.
-	 *
-	 * @return {HTMLDivElement} The root element for workflow tabs.
-	 */
-	const insertTabsRootDomElement = () => {
-		const rootElement = document.createElement( 'div' );
-		rootElement.setAttribute( 'id', 'automatewoo-workflow-tabs-root' );
-		const headerEnd = document.querySelector(
-			'#wpbody-content .wrap > h2.screen-reader-text'
-		);
-		headerEnd.parentNode.insertBefore( rootElement, headerEnd );
-		return rootElement;
-	};
+	let currentTab;
+	let reactTabsRoot;
+	const tabsRootEl = insertTabsRootDomElement();
 
 	const hackyUpdateAllWorkflowsTabVisibility = ( tabName ) => {
 		const elements = [
@@ -53,10 +84,6 @@ const loadTabHandler = ( defaultTabName, tabs ) => {
 		if ( tab.name === 'presets' ) {
 			return <PresetsTab />;
 		}
-	};
-
-	const getHash = () => {
-		return window.location.hash.substr( 1 );
 	};
 
 	const renderPageTabs = ( tabName ) => {
@@ -90,10 +117,6 @@ const loadTabHandler = ( defaultTabName, tabs ) => {
 		hackyUpdateAllWorkflowsTabVisibility( tabName );
 	};
 
-	const recordTracksTabViewEvent = ( tab ) => {
-		recordEvent( TRACKS_PREFIX + 'workflow_tab_view', { tab } );
-	};
-
 	const handleHashChange = () => {
 		const tabName = getHash();
 
@@ -117,29 +140,7 @@ const loadTabHandler = ( defaultTabName, tabs ) => {
 		renderPageTabs( tabName );
 	};
 
-	/**
-	 * Hide WelcomeNotice when we are in Presets tab.
-	 */
-	const maybeHideWelcomeNotice = () => {
-		const welcomeNotice = document.querySelector(
-			'.automatewoo-welcome-notice'
-		);
-
-		if ( ! welcomeNotice ) {
-			return;
-		}
-
-		if ( getHash() === 'presets' ) {
-			welcomeNotice.style.display = 'none';
-		} else {
-			welcomeNotice.style.display = 'block';
-		}
-	};
-
 	// Init
-	let currentTab;
-	let reactTabsRoot;
-	const tabsRootEl = insertTabsRootDomElement();
 	window.addEventListener( 'hashchange', handleHashChange, false );
 	renderPageTabs( getHash() );
 };

@@ -6,38 +6,34 @@
 
 	AW.Rules = Backbone.Model.extend( {
 		initialize() {
-			const app = this;
 			const ruleOptions = [];
 
 			if ( this.get( 'rawRuleOptions' ) ) {
 				// convert rule options from json to models
 
-				_.each(
-					this.get( 'rawRuleOptions' ),
-					function ( rawRuleGroup ) {
-						const group = new AW.RuleGroup( app );
-						const rules = [];
+				_.each( this.get( 'rawRuleOptions' ), ( rawRuleGroup ) => {
+					const group = new AW.RuleGroup( this );
+					const rules = [];
 
-						_.each( rawRuleGroup, function ( rawRule ) {
-							const rule = new AW.Rule( group );
+					_.each( rawRuleGroup, function ( rawRule ) {
+						const rule = new AW.Rule( group );
 
-							rule.set( 'name', rawRule.name );
-							rule.resetOptions();
-							rule.set( 'compare', rawRule.compare );
-							rule.set( 'value', rawRule.value );
+						rule.set( 'name', rawRule.name );
+						rule.resetOptions();
+						rule.set( 'compare', rawRule.compare );
+						rule.set( 'value', rawRule.value );
 
-							// for objects
-							if ( rawRule.selected ) {
-								rule.set( 'selected', rawRule.selected );
-							}
+						// for objects
+						if ( rawRule.selected ) {
+							rule.set( 'selected', rawRule.selected );
+						}
 
-							rules.push( rule );
-						} );
+						rules.push( rule );
+					} );
 
-						group.set( 'rules', rules );
-						ruleOptions.push( group );
-					}
-				);
+					group.set( 'rules', rules );
+					ruleOptions.push( group );
+				} );
 			}
 
 			this.set( 'ruleOptions', ruleOptions );
@@ -76,8 +72,9 @@
 			const groupedRules = {};
 
 			_.each( this.get( 'availableRules' ), function ( rule ) {
-				if ( ! groupedRules[ rule.group ] )
+				if ( ! groupedRules[ rule.group ] ) {
 					groupedRules[ rule.group ] = [];
+				}
 				groupedRules[ rule.group ].push( rule );
 			} );
 
@@ -174,7 +171,6 @@
 		 * async gather rule select choices, if not already loaded
 		 */
 		loadSelectOptions() {
-			const self = this;
 			const ruleObject = this.getRuleObject();
 
 			if (
@@ -185,7 +181,7 @@
 				return this;
 			}
 
-			self.set( 'isValueLoading', true );
+			this.set( 'isValueLoading', true );
 
 			$.getJSON(
 				ajaxurl,
@@ -193,14 +189,16 @@
 					action: 'aw_get_rule_select_choices',
 					rule_name: ruleObject.name,
 				},
-				function ( response ) {
-					if ( ! response.success ) return;
+				( response ) => {
+					if ( ! response.success ) {
+						return;
+					}
 
 					ruleObject.select_choices = response.data.select_choices;
 
-					self.set( 'isValueLoading', false );
-					self.set( 'object', ruleObject );
-					self.trigger( 'optionsLoaded' );
+					this.set( 'isValueLoading', false );
+					this.set( 'object', ruleObject );
+					this.trigger( 'optionsLoaded' );
 				}
 			);
 
@@ -286,21 +284,19 @@
 		},
 
 		render() {
-			const self = this;
-
-			self.$el.html(
-				self.template( {
-					rule: self.model.toJSON(),
+			this.$el.html(
+				this.template( {
+					rule: this.model.toJSON(),
 					groupedRules: AW.rules.get( 'groupedRules' ),
-					fieldNameBase: self.getFieldNameBase(),
+					fieldNameBase: this.getFieldNameBase(),
 				} )
 			);
 
-			self.setName();
-			self.setCompare();
-			self.setValue();
-			self.maybeToggleValueDisplay();
-			self.initDatepicker();
+			this.setName();
+			this.setCompare();
+			this.setValue();
+			this.maybeToggleValueDisplay();
+			this.initDatepicker();
 
 			$( document.body ).trigger( 'wc-enhanced-select-init' );
 
@@ -369,7 +365,6 @@
 
 			if ( selectedId ) {
 				const $fields = this.$el.find( '.js-rule-value-field' );
-				const thisModel = this;
 
 				if ( this.hasMultipleValueFields() ) {
 					if ( _.isArray( selectedId ) ) {
@@ -379,8 +374,8 @@
 					}
 
 					if ( _.isObject( selectedId ) ) {
-						Object.keys( selectedId ).forEach( function ( key ) {
-							$( '.js-rule-value-' + key, thisModel.$el ).val(
+						Object.keys( selectedId ).forEach( ( key ) => {
+							$( '.js-rule-value-' + key, this.$el ).val(
 								selectedId[ key ]
 							);
 						} );
@@ -497,16 +492,14 @@
 		},
 
 		render() {
-			const self = this;
+			if ( this.model.get( 'rules' ).length ) {
+				this.$el.html( this.template( this.model.toJSON() ) );
 
-			if ( self.model.get( 'rules' ).length ) {
-				self.$el.html( self.template( self.model.toJSON() ) );
+				this.$el.find( '.rules' ).empty();
 
-				self.$el.find( '.rules' ).empty();
-
-				_.each( self.model.get( 'rules' ), function ( rule ) {
+				_.each( this.model.get( 'rules' ), ( rule ) => {
 					const view = new AW.RuleView( { model: rule } );
-					self.$el.find( '.rules' ).append( view.render().el );
+					this.$el.find( '.rules' ).append( view.render().el );
 				} );
 			}
 
@@ -568,18 +561,17 @@
 		},
 
 		render() {
-			const self = this,
-				trigger = AW.workflow.get( 'trigger' );
+			const trigger = AW.workflow.get( 'trigger' );
 
-			self.$el.html(
-				self.template( {
-					app: self,
+			this.$el.html(
+				this.template( {
+					app: this,
 					trigger,
 				} )
 			);
 
-			const $groups = self.$el.find( '.aw-rule-groups' );
-			const groups = self.model.get( 'ruleOptions' );
+			const $groups = this.$el.find( '.aw-rule-groups' );
+			const groups = this.model.get( 'ruleOptions' );
 
 			if ( groups.length ) {
 				_.each( groups, function ( group ) {

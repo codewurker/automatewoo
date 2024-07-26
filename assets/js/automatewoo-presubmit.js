@@ -20,6 +20,23 @@ jQuery( function ( $ ) {
 		checkoutFieldsData[ fieldName ] = '';
 	} );
 
+	/**
+	 * Get the current values for checkout fields.
+	 *
+	 * @return {Object} Checkout fields.
+	 */
+	function getCheckoutFieldValues() {
+		const fields = {};
+
+		$.each( checkoutFields, function ( i, fieldName ) {
+			fields[ fieldName ] = $(
+				'form.woocommerce-checkout [name="' + fieldName + '"]'
+			).val();
+		} );
+
+		return fields;
+	}
+
 	function captureEmail() {
 		if ( ! $( this ).val() || email === $( this ).val() ) {
 			return;
@@ -76,23 +93,6 @@ jQuery( function ( $ ) {
 				}
 			);
 		}
-	}
-
-	/**
-	 * Get the current values for checkout fields.
-	 *
-	 * @return {Object} Checkout fields.
-	 */
-	function getCheckoutFieldValues() {
-		const fields = {};
-
-		$.each( checkoutFields, function ( i, fieldName ) {
-			fields[ fieldName ] = $(
-				'form.woocommerce-checkout [name="' + fieldName + '"]'
-			).val();
-		} );
-
-		return fields;
 	}
 
 	$( document ).on( 'blur change', emailFields.join( ', ' ), captureEmail );

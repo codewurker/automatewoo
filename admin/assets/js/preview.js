@@ -2,17 +2,6 @@
 // https://github.com/woocommerce/automatewoo/issues/1212
 /* global ajaxurl, alert, automatewooPreviewLocalizeScript */
 jQuery( function ( $ ) {
-	/**
-	 * Init
-	 */
-	function init() {
-		setIframeHeight();
-
-		$( window ).on( 'resize', function () {
-			setIframeHeight();
-		} );
-	}
-
 	function setIframeHeight() {
 		$( '.aw-preview__email-iframe' ).height(
 			$( window ).height() - $( '.aw-preview__header' ).outerHeight()
@@ -43,6 +32,17 @@ jQuery( function ( $ ) {
 
 		return false;
 	} );
+
+	/**
+	 * Init
+	 */
+	function init() {
+		setIframeHeight();
+
+		$( window ).on( 'resize', function () {
+			setIframeHeight();
+		} );
+	}
 
 	init();
 } );

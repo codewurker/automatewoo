@@ -1,5 +1,11 @@
 *** AutomateWoo Changelog ***
 
+2024-07-24 - version 6.0.30
+* Dev - Upgrade to use Node.js 20 and bump npm dependencies.
+* Fix - HTML formatting in the Workflows timing column.
+* Fix - Skip recurring jobs in the system check if the job is disabled.
+* Fix - The days input of "When to run" in the "Customer Birthday" trigger is not properly hidden when adding new workflow.
+
 2024-07-09 - version 6.0.29
 * Fix - Make the "Order - Created Via" rule support the Admin and Store API (Checkout Block) options.
 * Fix - Map `@babel/runtime/regenerator` request to `regenerator-runtime` in webpack.

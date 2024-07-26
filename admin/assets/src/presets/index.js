@@ -48,7 +48,7 @@ const PresetsTab = () => {
 		} catch ( error ) {
 			createNotice(
 				'error',
-				__( "Error: The workflow couldn't be created." )
+				__( "Error: The workflow couldn't be created.", 'automatewoo' )
 			);
 		}
 	};

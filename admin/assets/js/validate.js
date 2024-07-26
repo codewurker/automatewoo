@@ -44,7 +44,9 @@
 		},
 
 		validateField( $field ) {
-			if ( ! AW.workflow ) return;
+			if ( ! AW.workflow ) {
+				return;
+			}
 
 			const errors = [];
 			const text = $field.val();
@@ -178,7 +180,9 @@
 		 * @param {string} variable
 		 */
 		getDataTypeFromVariable( variable ) {
-			if ( variable.indexOf( '.' ) === -1 ) return false;
+			if ( variable.indexOf( '.' ) === -1 ) {
+				return false;
+			}
 			return variable.replace( /(\..*)/, '' );
 		},
 
@@ -188,7 +192,9 @@
 		getDataFieldFromVariable( variable ) {
 			variable = self.getVariableWithoutParams( variable );
 			const dotpos = variable.indexOf( '.' );
-			if ( dotpos === -1 ) return false;
+			if ( dotpos === -1 ) {
+				return false;
+			}
 			return variable.substring( dotpos + 1 ).trim();
 		},
 

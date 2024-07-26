@@ -9,51 +9,6 @@ import { useReducer } from '@wordpress/element';
 import { STEP_STATUSES as STATUSES } from '../utils';
 import { MANUAL_WORKFLOWS_BATCH_SIZE } from '../../settings';
 
-const initialState = {
-	status: STATUSES.PENDING,
-	progress: {},
-	progressPercent: 0,
-	items: {},
-};
-
-const reducer = ( state, action ) => {
-	switch ( action.type ) {
-		case 'FIND_ITEMS_REQUEST':
-			if ( state.status === STATUSES.REQUESTING ) {
-				return state;
-			}
-			return {
-				...state,
-				status: STATUSES.REQUESTING,
-			};
-		case 'FIND_ITEMS_ERROR':
-			if ( state.status === STATUSES.ERROR ) {
-				return state;
-			}
-			return {
-				...state,
-				status: STATUSES.ERROR,
-			};
-		case 'FIND_ITEMS_SUCCESS':
-			const newProgress = incrementProgressData( state.progress );
-			const progressPercent = calculateProgressPercentage( newProgress );
-
-			return {
-				...state,
-				status:
-					progressPercent === 100
-						? STATUSES.COMPLETE
-						: STATUSES.PENDING,
-				// IMPORTANT: Don't add duplicate items
-				items: { ...action.items, ...state.items },
-				progress: newProgress,
-				progressPercent,
-			};
-		default:
-			return state;
-	}
-};
-
 /**
  * @param {Object} progressData
  * @return {string|null} The index of the current progress group or null.
@@ -117,6 +72,51 @@ const calculateProgressPercentage = ( progressData ) => {
 	}
 	const progress = Math.floor( ( complete / total ) * 100 );
 	return progress > 100 ? 100 : progress;
+};
+
+const initialState = {
+	status: STATUSES.PENDING,
+	progress: {},
+	progressPercent: 0,
+	items: {},
+};
+
+const reducer = ( state, action ) => {
+	switch ( action.type ) {
+		case 'FIND_ITEMS_REQUEST':
+			if ( state.status === STATUSES.REQUESTING ) {
+				return state;
+			}
+			return {
+				...state,
+				status: STATUSES.REQUESTING,
+			};
+		case 'FIND_ITEMS_ERROR':
+			if ( state.status === STATUSES.ERROR ) {
+				return state;
+			}
+			return {
+				...state,
+				status: STATUSES.ERROR,
+			};
+		case 'FIND_ITEMS_SUCCESS':
+			const newProgress = incrementProgressData( state.progress );
+			const progressPercent = calculateProgressPercentage( newProgress );
+
+			return {
+				...state,
+				status:
+					progressPercent === 100
+						? STATUSES.COMPLETE
+						: STATUSES.PENDING,
+				// IMPORTANT: Don't add duplicate items
+				items: { ...action.items, ...state.items },
+				progress: newProgress,
+				progressPercent,
+			};
+		default:
+			return state;
+	}
 };
 
 /**
