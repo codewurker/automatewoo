@@ -63,11 +63,11 @@ class Integration_ActiveCampaign extends Integration {
 	 *
 	 * @see https://developers.activecampaign.com/reference/create-a-new-contact
 	 *
-	 * @param string $email      Email address for the contact
+	 * @param string $email Email address for the contact
 	 * @param string $first_name First name for the contact
-	 * @param string $last_name  Last name for the contact
-	 * @param string $phone      Phone number for the contact
-	 * @param string $company    Company for the contact
+	 * @param string $last_name Last name for the contact
+	 * @param string $phone Phone number for the contact
+	 * @param string $company Company for the contact
 	 *
 	 * @return bool|array An array containing contact details or false if unsuccessful
 	 */
@@ -110,9 +110,9 @@ class Integration_ActiveCampaign extends Integration {
 	 *
 	 * @see https://developers.activecampaign.com/reference/create-an-account-1
 	 *
-	 * @param string $contact_id         ID of the contact to sync company data for
+	 * @param string $contact_id ID of the contact to sync company data for
 	 * @param string $current_company_id ID of the company currently associated with the contact ("0" = none)
-	 * @param string $company_name       Name of the company to sync
+	 * @param string $company_name Name of the company to sync
 	 *
 	 * @return bool
 	 */
@@ -128,6 +128,7 @@ class Integration_ActiveCampaign extends Integration {
 			if ( $current_company_id !== '0' ) {
 				if ( ! $this->delete_account_association( $contact_id ) ) {
 					$this->log( esc_html__( 'There was an error when attempting to delete an association', 'automatewoo' ) );
+
 					return false;
 				}
 			}
@@ -154,7 +155,7 @@ class Integration_ActiveCampaign extends Integration {
 	 *
 	 * @see https://developers.activecampaign.com/reference/list-all-accounts
 	 *
-	 * @param string $account_name           Name of the account to search for
+	 * @param string $account_name Name of the account to search for
 	 * @param bool   $create_missing_account If true then the account will be created if not found
 	 *
 	 * @return bool|array
@@ -227,6 +228,7 @@ class Integration_ActiveCampaign extends Integration {
 
 		if ( ! isset( $response['lists'] ) ) {
 			$this->log( __( 'Unexpected response when trying to retrieve all lists', 'automatewoo' ) );
+
 			return [];
 		}
 
@@ -246,7 +248,7 @@ class Integration_ActiveCampaign extends Integration {
 	 * @see https://developers.activecampaign.com/reference/update-list-status-for-contact
 	 *
 	 * @param string $contact ID of the contact to add to a list
-	 * @param string $list    ID of the list to add the contact to
+	 * @param string $list ID of the list to add the contact to
 	 *
 	 * @return bool
 	 */
@@ -297,6 +299,7 @@ class Integration_ActiveCampaign extends Integration {
 	public function get_contact( $email ) {
 		if ( ! is_email( $email ) ) {
 			$this->log( __( 'Invalid email was supplied when checking if contact exists in ActiveCampaign', 'automatewoo' ) );
+
 			return false;
 		}
 
@@ -334,6 +337,7 @@ class Integration_ActiveCampaign extends Integration {
 
 		if ( ! isset( $response['fields'] ) ) {
 			$this->log( __( 'Unexpected response when trying to retrieve all custom fields', 'automatewoo' ) );
+
 			return [];
 		}
 
@@ -351,9 +355,9 @@ class Integration_ActiveCampaign extends Integration {
 	/**
 	 * Get a tag ID by its name
 	 *
-	 * @param string $tag                Name of the tag to get the ID for
+	 * @param string $tag Name of the tag to get the ID for
 	 * @param bool   $create_missing_tag If true then the tag will be created if not found
-	 * @param bool   $retry_on_error     Whether to retry if an error occurs when creating a tag. It will clear the cache and try again.
+	 * @param bool   $retry_on_error Whether to retry if an error occurs when creating a tag. It will clear the cache and try again.
 	 *
 	 * @return string|bool
 	 */
@@ -365,7 +369,7 @@ class Integration_ActiveCampaign extends Integration {
 			if ( $cache ) {
 				$this->active_tags = $cache;
 			} else {
-				$response          = $this->request( 'tags' )->get_body();
+				$response          = $this->paginated_request( 'tags' );
 				$this->active_tags = $response['tags'];
 
 				Cache::set_transient( $transient, $this->active_tags, 0.15 );
@@ -395,10 +399,12 @@ class Integration_ActiveCampaign extends Integration {
 					// Somehow the tag was created by another process in the meantime or externally so we clear the cache and try again.
 					Cache::delete_transient( $transient );
 					$this->active_tags = [];
+
 					return $this->get_tag_id( $tag, $create_missing_tag, false );
 				}
 				// phpcs:disable WordPress.PHP.DevelopmentFunctions
 				$this->log( 'Unexpected response when attempting to create a tag. Response: ' . print_r( $response, true ) . 'Tags: ' . print_r( $this->active_tags, true ) );
+
 				// phpcs:enable
 				return false;
 			}
@@ -417,7 +423,7 @@ class Integration_ActiveCampaign extends Integration {
 	 * Add tags to an existing contact
 	 *
 	 * @param string $contact ID of the contact to add tags to
-	 * @param array  $tags    An array of tags to add
+	 * @param array  $tags An array of tags to add
 	 *
 	 * @return bool
 	 */
@@ -453,8 +459,8 @@ class Integration_ActiveCampaign extends Integration {
 	 *
 	 * @see https://developers.activecampaign.com/reference/overview
 	 *
-	 * @param string $path   Path to the API endpoint
-	 * @param array  $data   Data to include with the request
+	 * @param string $path Path to the API endpoint
+	 * @param array  $data Data to include with the request
 	 * @param string $method The HTTP method for this request
 	 *
 	 * @return \ActiveCampaign|false
@@ -497,11 +503,43 @@ class Integration_ActiveCampaign extends Integration {
 		return $response;
 	}
 
+	/**
+	 * Send a request to the ActiveCampaign API with pagination
+	 *
+	 * @see https://developers.activecampaign.com/reference/pagination
+	 *
+	 * @param string $path Path to the API endpoint
+	 * @param array  $data Data to include with the request
+	 * @param string $method The HTTP method for this request
+	 * @param int    $page The page to fetch.
+	 * @param array  $results Accumulated results for all the pages.
+	 *
+	 * @return array
+	 */
+	public function paginated_request( $path, $data = [], $method = 'GET', $page = 0, $results = [] ) {
+
+		// Set offset based on the $page and the api_pagination_limit
+		$data['limit']  = $this->get_api_pagination_limit();
+		$data['offset'] = $page * $this->get_api_pagination_limit();
+
+		// Get elements for the current page and add them to the results.
+		$request = $this->request( $path, $data, $method )->get_body();
+		$results = array_merge( $results, $request[ $path ] );
+
+		// If there are more elements left. Fetch again with the next page.
+		if ( $request['meta']['total'] > count( $results ) ) {
+			return $this->paginated_request( $path, $data, $method, ++$page, $results );
+		}
+
+		return [
+			$path  => $results,
+			'meta' => [ 'total' => $request['meta']['total'] ],
+		];
+	}
 
 	/**
-	 * @deprecated
-	 *
 	 * @return void
+	 * @deprecated
 	 */
 	protected function get_sdk() {
 		wc_deprecated_function( __METHOD__, '6.1.0', 'request' );
@@ -517,5 +555,22 @@ class Integration_ActiveCampaign extends Integration {
 		Cache::delete_transient( 'ac_lists' );
 		Cache::delete_transient( 'ac_tags' );
 		Cache::delete_transient( 'ac_contact_fields' );
+	}
+
+
+	/**
+	 * Get the pagination limit.
+	 *
+	 * @return int
+	 */
+	public function get_api_pagination_limit() {
+
+		/**
+		 * Filter the pagination limit for Active Campaign REST API.
+		 *
+		 * @since 6.0.31
+		 * @filter automatewoo/integrations/active_campaign/pagination
+		 */
+		return apply_filters( 'automatewoo/integrations/active_campaign/pagination', 100 );
 	}
 }

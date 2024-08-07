@@ -71,7 +71,7 @@ class Action_Send_Email_Raw extends Action_Send_Email_Abstract {
 		// no user should be logged in
 		// When the user_id value is 0, it's a session for a logged-out user
 		// see https://wordpress.org/support/topic/sessions-with-user-id-0/
-		// phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
+		// phpcs:ignore Generic.PHP.ForbiddenFunctions
 		wp_set_current_user( 0 );
 
 		return $this->get_workflow_email_object( $current_user->get( 'user_email' ), $html )

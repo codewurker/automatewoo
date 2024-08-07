@@ -1,5 +1,9 @@
 *** AutomateWoo Changelog ***
 
+2024-08-06 - version 6.0.31
+* Dev - Fix false positive warning in QIT.
+* Fix - Add Active Campaign Pagination for tags.
+
 2024-07-24 - version 6.0.30
 * Dev - Upgrade to use Node.js 20 and bump npm dependencies.
 * Fix - HTML formatting in the Workflows timing column.
