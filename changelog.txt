@@ -1,5 +1,8 @@
 *** AutomateWoo Changelog ***
 
+2024-08-14 - version 6.0.32
+* Tweak - WC 9.2.0 compatibility.
+
 2024-08-06 - version 6.0.31
 * Dev - Fix false positive warning in QIT.
 * Fix - Add Active Campaign Pagination for tags.
