@@ -3,7 +3,7 @@
  * Plugin Name: AutomateWoo
  * Plugin URI: https://automatewoo.com
  * Description: Powerful marketing automation for your WooCommerce store.
- * Version: 6.0.32
+ * Version: 6.0.33
  * Author: WooCommerce
  * Author URI: https://woocommerce.com
  * License: GPLv3
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  * Tested up to: 6.6
  * Requires Plugins: woocommerce
- * WC requires at least: 6.7
+ * WC requires at least: 7.9
  * WC tested up to: 9.2.0
  * Woo: 4652610:f6f1f8a56a16a3715b30b21fb557e78f
  *
@@ -37,14 +37,12 @@ use Automattic\WooCommerce\Utilities\FeaturesUtil;
 defined( 'ABSPATH' ) || exit;
 
 define( 'AUTOMATEWOO_SLUG', 'automatewoo' );
-define( 'AUTOMATEWOO_VERSION', '6.0.32' ); // WRCS: DEFINED_VERSION.
+define( 'AUTOMATEWOO_VERSION', '6.0.33' ); // WRCS: DEFINED_VERSION.
 define( 'AUTOMATEWOO_FILE', __FILE__ );
 define( 'AUTOMATEWOO_PATH', __DIR__ );
 define( 'AUTOMATEWOO_MIN_PHP_VER', '7.4.0' );
 define( 'AUTOMATEWOO_MIN_WP_VER', '5.9' );
-// IMPORTANT: If AUTOMATEWOO_MIN_WC_VER is updated, AW Refer a friend (PHP Unit Tests) should be updated accordingly
-// See https://github.com/woocommerce/automatewoo-referrals/blob/684a6d7f1e33359553b3b681b32cb4bad8d53089/.github/workflows/php-unit-tests.yml#L34-L40
-define( 'AUTOMATEWOO_MIN_WC_VER', '6.7.0' );
+define( 'AUTOMATEWOO_MIN_WC_VER', '7.9.0' );
 
 /**
  * AutomateWoo loader.

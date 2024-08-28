@@ -66,7 +66,7 @@ class Data_Store extends Log_Stats_Store {
 	 * @param int      $expected_interval_count Number of expected intervals.
 	 * @return stdClass|WP_Error Data object `{ totals: *, intervals: array, total: int, pages: int, page_no: int }`, or error.
 	 */
-	public function get_noncached_data( $query_args, $params, &$data, $expected_interval_count ) {
+	public function get_noncached_stats_data( $query_args, $params, &$data, $expected_interval_count ) {
 		global $wpdb;
 		$table_name = self::get_db_table_name();
 

@@ -3,6 +3,8 @@ namespace AutomateWoo\Admin\Analytics\Rest_API\Upstream;
 
 defined( 'ABSPATH' ) || exit;
 
+
+use Automattic\WooCommerce\Admin\API\Reports\GenericStatsController as WCGenericStatsController;
 use Automattic\WooCommerce\Admin\API\Reports\ParameterException;
 use WP_Error;
 use WP_REST_Request;
@@ -11,11 +13,11 @@ use WP_REST_Response;
 /**
  * This is a generic class, to cover bits shared by all reports.
  * Discovered in https://github.com/woocommerce/automatewoo/pull/1226#pullrequestreview-1210449142
- * We may consider moving it eventually to `WC_REST_Reports_Controller`,
+ * We may consider moving it eventually to `Automattic\WooCommerce\Admin\API\Reports\GenericStatsController`,
  * so the other extensions and WC itself could make use of it, and get DRYier.
  * https://github.com/woocommerce/automatewoo/issues/1238
  */
-class Generic_Stats_Controller extends Generic_Controller {
+abstract class Generic_Stats_Controller extends WCGenericStatsController {
 
 	/**
 	 * Get all reports.
@@ -52,117 +54,6 @@ class Generic_Stats_Controller extends Generic_Controller {
 	}
 
 	/**
-	 * Get the Report's schema, conforming to JSON Schema.
-	 *
-	 * Compatibility-code "WC<=7.8"
-	 * Once WC > 7.8 is out and covers our L-2, we can inherit this from `GenericController`.
-	 *
-	 * @return array
-	 */
-	public function get_item_schema() {
-		$data_values = $this->get_item_properties_schema();
-
-		$segments = array(
-			'segments' => array(
-				'description' => __( 'Reports data grouped by segment condition.', 'automatewoo' ),
-				'type'        => 'array',
-				'context'     => array( 'view', 'edit' ),
-				'readonly'    => true,
-				'items'       => array(
-					'type'       => 'object',
-					'properties' => array(
-						'segment_id' => array(
-							'description' => __( 'Segment identificator.', 'automatewoo' ),
-							'type'        => 'integer',
-							'context'     => array( 'view', 'edit' ),
-							'readonly'    => true,
-						),
-						'subtotals'  => array(
-							'description' => __( 'Interval subtotals.', 'automatewoo' ),
-							'type'        => 'object',
-							'context'     => array( 'view', 'edit' ),
-							'readonly'    => true,
-							'properties'  => $data_values,
-						),
-					),
-				),
-			),
-		);
-
-		$totals = array_merge( $data_values, $segments );
-
-		$schema = array(
-			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => 'report_stats',
-			'type'       => 'object',
-			'properties' => array(
-				'totals'    => array(
-					'description' => __( 'Totals data.', 'automatewoo' ),
-					'type'        => 'object',
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
-					'properties'  => $totals,
-				),
-				'intervals' => array(
-					'description' => __( 'Reports data grouped by intervals.', 'automatewoo' ),
-					'type'        => 'array',
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
-					'items'       => array(
-						'type'       => 'object',
-						'properties' => array(
-							'interval'       => array(
-								'description' => __( 'Type of interval.', 'automatewoo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-								'enum'        => array( 'day', 'week', 'month', 'year' ),
-							),
-							'date_start'     => array(
-								'description' => __( "The date the report start, in the site's timezone.", 'automatewoo' ),
-								'type'        => 'string',
-								'format'      => 'date-time',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'date_start_gmt' => array(
-								'description' => __( 'The date the report start, as GMT.', 'automatewoo' ),
-								'type'        => 'string',
-								'format'      => 'date-time',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'date_end'       => array(
-								'description' => __( "The date the report end, in the site's timezone.", 'automatewoo' ),
-								'type'        => 'string',
-								'format'      => 'date-time',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'date_end_gmt'   => array(
-								'description' => __( 'The date the report end, as GMT.', 'automatewoo' ),
-								'type'        => 'string',
-								'format'      => 'date-time',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'subtotals'      => array(
-								'description' => __( 'Interval subtotals.', 'automatewoo' ),
-								'type'        => 'object',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-								'properties'  => $totals,
-							),
-						),
-					),
-				),
-			),
-		);
-
-		return $this->add_additional_fields_schema( $schema );
-	}
-
-	/**
 	 * Get the query params for collections.
 	 *
 	 * You may consider extending it with `segmentby`, with:
@@ -178,29 +69,12 @@ class Generic_Stats_Controller extends Generic_Controller {
 	 * );
 	 * ```
 	 *
-	 * Compatibility-code "WC<
-	 * Once WC > 7.8 is out and covers our L-2, we can inherit this from `GenericController`.
-	 *
 	 * @return array
 	 */
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['interval'] = array(
-			'description'       => __( 'Time interval to use for buckets in the returned data.', 'automatewoo' ),
-			'type'              => 'string',
-			'default'           => 'week',
-			'enum'              => array(
-				'hour',
-				'day',
-				'week',
-				'month',
-				'quarter',
-				'year',
-			),
-			'validate_callback' => 'rest_validate_request_arg',
-		);
-		$params['fields']   = array(
+		$params['fields'] = array(
 			'description'       => __( 'Limit stats fields to the specified items.', 'automatewoo' ),
 			'type'              => 'array',
 			'sanitize_callback' => 'wp_parse_slug_list',
@@ -211,5 +85,51 @@ class Generic_Stats_Controller extends Generic_Controller {
 		);
 
 		return $params;
+	}
+
+	/**
+	 * Forwards a Query constructor,
+	 * to be able to customize Query class for a specific report.
+	 *
+	 * @param array $query_args Set of args to be forwarded to the constructor.
+	 * @return Generic_Query
+	 */
+	protected function construct_query( $query_args ) {
+		return new Generic_Query( $query_args, $this->rest_base );
+	}
+
+	/**
+	 * Maps query arguments from the REST request.
+	 *
+	 * `WP_REST_Request` does not expose a method to return all params covering defaults,
+	 * as it does for `$request['param']` accessor.
+	 * Therefore, we re-implement defaults resolution.
+	 *
+	 * @param WP_REST_Request $request Full request object.
+	 * @return array Simplified array of params.
+	 */
+	public function prepare_reports_query( $request ) {
+		$args = wp_parse_args(
+			array_intersect_key(
+				$request->get_query_params(),
+				$this->get_collection_params()
+			),
+			$request->get_default_params()
+		);
+
+		return $args;
+	}
+
+	/**
+	 * Prepare a report object for serialization.
+	 *
+	 * @param stdClass        $report  Report data.
+	 * @param WP_REST_Request $request Request object.
+	 * @return WP_REST_Response
+	 */
+	public function prepare_item_for_response( $report, $request ) {
+		$data = get_object_vars( $report );
+
+		return parent::prepare_item_for_response( $data, $request );
 	}
 }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: AutomateWoo 6.0.32\n"
+"Project-Id-Version: AutomateWoo 6.0.33\n"
 "Report-Msgid-Bugs-To: https://woocommerce.com/my-account/contact-support/\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-14T09:48:05+00:00\n"
+"POT-Creation-Date: 2024-08-28T01:06:16+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: automatewoo\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: admin/admin.php:825
 #: admin/coupons-list.php:42
 #: admin/WCAdminConnectPages.php:74
-#: automatewoo.php:131
+#: automatewoo.php:129
 #: includes/Actions/Change_Workflow_Status.php:18
 #: includes/Actions/Clear_Queued_Events.php:17
 #: includes/Installer.php:248
@@ -325,83 +325,13 @@ msgstr ""
 msgid "Sorry, fetching unsubscribers data failed."
 msgstr ""
 
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:176
-msgid "Current page of the collection."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:184
-msgid "Maximum number of items to be returned in result set."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:193
-#: includes/Rest_Api/Controllers/LogsController.php:120
-msgid "Limit response to resources published after a given ISO8601 compliant date."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:199
-#: includes/Rest_Api/Controllers/LogsController.php:113
-msgid "Limit response to resources published before a given ISO8601 compliant date."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:205
-msgid "Order sort attribute ascending or descending."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:212
-msgid "Sort collection by object attribute."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Controller.php:221
-msgid "Force retrieval of fresh data instead of from the cache."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:67
-msgid "Reports data grouped by segment condition."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:75
-msgid "Segment identificator."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:81
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:150
-msgid "Interval subtotals."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:100
-msgid "Totals data."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:107
-msgid "Reports data grouped by intervals."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:115
-msgid "Type of interval."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:122
-msgid "The date the report start, in the site's timezone."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:129
-msgid "The date the report start, as GMT."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:136
-msgid "The date the report end, in the site's timezone."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:143
-msgid "The date the report end, as GMT."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:190
-msgid "Time interval to use for buckets in the returned data."
-msgstr ""
-
-#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:204
+#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Controller.php:78
 msgid "Limit stats fields to the specified items."
+msgstr ""
+
+#. translators: %s: Method name
+#: admin/Analytics/Rest_API/Upstream/Generic_Stats_Store.php:118
+msgid "Method '%s' not implemented. Must be overridden in subclass."
 msgstr ""
 
 #: admin/Analytics/Rest_API/Workflow_Runs/Stats_Controller.php:44
@@ -2085,22 +2015,22 @@ msgid "Manual"
 msgstr ""
 
 #. translators: Plugin name.
-#: automatewoo.php:131
+#: automatewoo.php:129
 msgid "%s is inactive."
 msgstr ""
 
 #. translators: %1$s inactive plugin text, %2$s minimum PHP version
-#: automatewoo.php:135
+#: automatewoo.php:133
 msgid "%1$s The plugin requires PHP version %2$s or newer."
 msgstr ""
 
 #. translators: %1$s inactive plugin text, %2$s minimum WooCommerce version
-#: automatewoo.php:139
+#: automatewoo.php:137
 msgid "%1$s The plugin requires WooCommerce version %2$s or newer."
 msgstr ""
 
 #. translators: %1$s inactive plugin text, %2$s minimum WordPress version
-#: automatewoo.php:143
+#: automatewoo.php:141
 msgid "%1$s The plugin requires WordPress version %2$s or newer."
 msgstr ""
 
@@ -4372,6 +4302,14 @@ msgstr ""
 #. translators: Order ID.
 #: includes/Rest_Api/Controllers/ConversionsController.php:141
 msgid "Invalid order ID %d."
+msgstr ""
+
+#: includes/Rest_Api/Controllers/LogsController.php:113
+msgid "Limit response to resources published before a given ISO8601 compliant date."
+msgstr ""
+
+#: includes/Rest_Api/Controllers/LogsController.php:120
+msgid "Limit response to resources published after a given ISO8601 compliant date."
 msgstr ""
 
 #: includes/Rest_Api/Controllers/LogsController.php:127

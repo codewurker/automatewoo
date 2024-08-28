@@ -26,7 +26,7 @@ use WC_Data_Store;
  * @see Automattic\WooCommerce\Admin\API\Reports\Query
  * @since 5.6.9
  */
-class Generic_Query extends WooReportsQuery {
+class Generic_Query extends \WC_Object_Query {
 
 	/**
 	 * Store name
@@ -45,7 +45,7 @@ class Generic_Query extends WooReportsQuery {
 	public function __construct( $args, $store_name ) {
 		$this->store_name = $store_name;
 
-		return parent::__construct( $args ); // phpcs:ignore Universal.CodeAnalysis.ConstructorDestructorReturn.ReturnValueFound
+		parent::__construct( $args );
 	}
 	/**
 	 * Valid fields for Products report.

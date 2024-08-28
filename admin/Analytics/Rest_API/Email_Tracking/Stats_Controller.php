@@ -73,6 +73,6 @@ class Stats_Controller extends Log_Stats_Controller {
 		$schema          = parent::get_item_schema();
 		$schema['title'] = 'report_email_tracking_stats';
 
-		return $schema;
+		return $this->add_additional_fields_schema( $schema );
 	}
 }

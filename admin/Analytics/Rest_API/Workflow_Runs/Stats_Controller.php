@@ -57,6 +57,6 @@ class Stats_Controller extends Log_Stats_Controller {
 		$schema          = parent::get_item_schema();
 		$schema['title'] = 'report_workflow_runs_stats';
 
-		return $schema;
+		return $this->add_additional_fields_schema( $schema );
 	}
 }

@@ -44,4 +44,14 @@ class Log_Stats_Controller extends Generic_Stats_Controller {
 
 		return $params;
 	}
+
+	/**
+	 * Get the report's item properties schema.
+	 * Will be used by `get_item_schema` as `totals` and `subtotals`.
+	 *
+	 * @return array
+	 */
+	public function get_item_properties_schema() {
+		return array();
+	}
 }

@@ -1,5 +1,8 @@
 *** AutomateWoo Changelog ***
 
+2024-08-28 - version 6.0.33
+* Bump min WC version to 7.9, reuse upstreamed classes.
+
 2024-08-14 - version 6.0.32
 * Tweak - WC 9.2.0 compatibility.
 

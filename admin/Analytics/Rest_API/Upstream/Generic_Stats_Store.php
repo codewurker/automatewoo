@@ -25,7 +25,7 @@ use WP_Error;
  * @extends Reports_Data_Store
  * @version 5.6.8
  */
-abstract class Generic_Stats_Store extends Reports_Data_Store {
+class Generic_Stats_Store extends Reports_Data_Store {
 
 	/**
 	 * Report columns.
@@ -50,9 +50,9 @@ abstract class Generic_Stats_Store extends Reports_Data_Store {
 
 	/**
 	 * Returns the report data based on parameters supplied by the user.
-	 * Fetches it from cache or returns `get_noncached_data` result.
+	 * Fetches it from cache or returns `get_noncached_stats_data` result.
 	 *
-	 * @see get_noncached_data
+	 * @see get_noncached_stats_data
 	 * @param array $query_args  Query parameters.
 	 * @return stdClass|WP_Error Data object `{ totals: *, intervals: array, total: int, pages: int, page_no: int }`, or error.
 	 */
@@ -94,7 +94,7 @@ abstract class Generic_Stats_Store extends Reports_Data_Store {
 			// If the requested page is out off range, return the deault empty object.
 			if ( $query_args['page'] >= 1 && $query_args['page'] <= $total_pages ) {
 				// Fetch the actual data.
-				$data = $this->get_noncached_data( $query_args, $params, $data, $expected_interval_count );
+				$data = $this->get_noncached_stats_data( $query_args, $params, $data, $expected_interval_count );
 			}
 			$this->set_cached_data( $cache_key, $data );
 		}
@@ -113,21 +113,11 @@ abstract class Generic_Stats_Store extends Reports_Data_Store {
 	 * @param int      $expected_interval_count Number of expected intervals.
 	 * @return stdClass|WP_Error Data object `{ totals: *, intervals: array, total: int, pages: int, page_no: int }`, or error.
 	 */
-	abstract public function get_noncached_data( $query_args, $params, &$data, $expected_interval_count );
-
-	/**
-	 * Normalizes order_by clause to match to SQL query.
-	 *
-	 * @param  string $order_by Order by option requested by user.
-	 * @return string
-	 */
-	protected function normalize_order_by( $order_by ) {
-		if ( 'date' === $order_by ) {
-			return 'time_interval';
-		}
-
-		return $order_by;
+	public function get_noncached_stats_data( $query_args, $params, &$data, $expected_interval_count ) {
+		/* translators: %s: Method name */
+		return new \WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'automatewoo' ), __METHOD__ ), array( 'status' => 405 ) );
 	}
+
 
 	/**
 	 * Initialize query objects.
