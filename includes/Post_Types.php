@@ -4,7 +4,6 @@
 namespace AutomateWoo;
 
 use Automattic\WooCommerce\Admin\Features\Features as WCAdminFeatures;
-use Automattic\WooCommerce\Admin\Features\Navigation\Screen;
 
 /**
  * @class Post_Types
@@ -58,10 +57,6 @@ class Post_Types {
 				]
 			)
 		);
-
-		if ( class_exists( Screen::class ) ) {
-			Screen::register_post_type( 'aw_workflow' );
-		}
 
 		do_action('automatewoo_after_register_post_types');
 	}

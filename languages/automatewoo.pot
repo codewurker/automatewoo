@@ -2,26 +2,25 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: AutomateWoo 6.0.33\n"
+"Project-Id-Version: AutomateWoo 6.1.0\n"
 "Report-Msgid-Bugs-To: https://woocommerce.com/my-account/contact-support/\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-28T01:06:16+02:00\n"
+"POT-Creation-Date: 2024-09-05T13:24:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: automatewoo\n"
 
 #. Plugin Name of the plugin
 #. translators: Plugin name.
-#: admin/admin.php:148
-#: admin/admin.php:149
-#: admin/admin.php:161
-#: admin/admin.php:825
+#: admin/admin.php:145
+#: admin/admin.php:146
+#: admin/admin.php:746
 #: admin/coupons-list.php:42
-#: admin/WCAdminConnectPages.php:74
+#: admin/WCAdminConnectPages.php:59
 #: automatewoo.php:129
 #: includes/Actions/Change_Workflow_Status.php:18
 #: includes/Actions/Clear_Queued_Events.php:17
@@ -47,114 +46,108 @@ msgstr ""
 msgid "https://woocommerce.com"
 msgstr ""
 
-#: admin/admin.php:169
-#: admin/admin.php:186
-#: admin/admin.php:196
+#: admin/admin.php:155
+#: admin/views/page-dashboard.php:17
+#: admin/WCAdminConnectPages.php:60
+msgid "Dashboard"
+msgstr ""
+
+#: admin/admin.php:161
 #: admin/Analytics.php:45
 #: admin/reports-tabs/runs-by-date.php:14
-#: admin/WCAdminConnectPages.php:87
+#: admin/WCAdminConnectPages.php:72
 #: includes/Actions/Clear_Queued_Events.php:26
-#: includes/Post_Types.php:30
+#: includes/Post_Types.php:29
 #: includes/Triggers/Workflow_Times_Run_Reaches.php:18
 #: admin/assets/build/index.js:31
 msgid "Workflows"
 msgstr ""
 
-#: admin/admin.php:179
-#: admin/views/page-dashboard.php:17
-#: admin/WCAdminConnectPages.php:75
-msgid "Dashboard"
-msgstr ""
-
-#: admin/admin.php:206
-msgid "Add workflow"
-msgstr ""
-
-#: admin/admin.php:213
+#: admin/admin.php:166
 #: admin/reports/email-tracking.php:341
 #: admin/reports/logs.php:19
-#: admin/WCAdminConnectPages.php:114
+#: admin/WCAdminConnectPages.php:99
 msgid "Logs"
 msgstr ""
 
-#: admin/admin.php:219
-#: admin/WCAdminConnectPages.php:115
+#: admin/admin.php:170
+#: admin/WCAdminConnectPages.php:100
 #: admin/assets/build/index.js:28
 msgid "Queue"
 msgstr ""
 
-#: admin/admin.php:227
+#: admin/admin.php:176
 #: admin/reports/carts.php:21
 #: admin/settings-tabs/carts.php:17
-#: admin/WCAdminConnectPages.php:116
+#: admin/WCAdminConnectPages.php:101
 #: includes/Privacy_Policy_Guide.php:34
 #: includes/Triggers/Abstract_Abandoned_Cart.php:21
 msgid "Carts"
 msgstr ""
 
-#: admin/admin.php:234
+#: admin/admin.php:182
 #: admin/reports/guests.php:23
-#: admin/WCAdminConnectPages.php:117
+#: admin/WCAdminConnectPages.php:102
 #: includes/Triggers/Guest_Created.php:19
 msgid "Guests"
 msgstr ""
 
-#: admin/admin.php:240
+#: admin/admin.php:187
 #: admin/reports/opt-ins.php:33
-#: admin/WCAdminConnectPages.php:118
+#: admin/WCAdminConnectPages.php:103
 msgid "Opt-ins"
 msgstr ""
 
-#: admin/admin.php:240
+#: admin/admin.php:187
 #: admin/reports/opt-ins.php:33
-#: admin/WCAdminConnectPages.php:118
+#: admin/WCAdminConnectPages.php:103
 msgid "Opt-outs"
 msgstr ""
 
-#: admin/admin.php:246
-#: admin/WCAdminConnectPages.php:181
+#: admin/admin.php:192
+#: admin/WCAdminConnectPages.php:166
 msgid "Reports"
 msgstr ""
 
-#: admin/admin.php:253
-#: admin/WCAdminConnectPages.php:201
+#: admin/admin.php:198
+#: admin/WCAdminConnectPages.php:186
 msgid "Tools"
 msgstr ""
 
-#: admin/admin.php:259
-#: admin/WCAdminConnectPages.php:162
+#: admin/admin.php:203
+#: admin/WCAdminConnectPages.php:147
 #: includes/Installer.php:272
 msgid "Settings"
 msgstr ""
 
-#: admin/admin.php:265
+#: admin/admin.php:208
 #: admin/views/action.php:30
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.php:271
+#: admin/admin.php:213
 msgid "AutomateWoo Data Update"
 msgstr ""
 
-#: admin/admin.php:323
+#: admin/admin.php:244
 msgid "Manual Workflow Runner"
 msgstr ""
 
-#: admin/admin.php:442
+#: admin/admin.php:363
 msgid "This field does not support variables."
 msgstr ""
 
 #. translators: Variable name.
-#: admin/admin.php:444
+#: admin/admin.php:365
 msgid "Variable '%s' is not available with the selected trigger. Please only use variables listed in the the variables box."
 msgstr ""
 
 #. translators: Variable name.
-#: admin/admin.php:446
+#: admin/admin.php:367
 msgid "Variable '%s' is not valid. Please only use variables listed in the variables box."
 msgstr ""
 
-#: admin/admin.php:447
+#: admin/admin.php:368
 msgid "Choose a trigger before selecting a variable."
 msgstr ""
 
@@ -845,7 +838,7 @@ msgstr ""
 #: admin/views/modal-log-info.php:27
 #: admin/views/modal-queued-event-info.php:28
 #: includes/Fields/Workflow.php:26
-#: includes/Post_Types.php:31
+#: includes/Post_Types.php:30
 #: admin/assets/build/analytics.js:3
 #: admin/assets/build/index.js:4
 msgid "Workflow"
@@ -1396,7 +1389,7 @@ msgid "There are no users with that tag."
 msgstr ""
 
 #: admin/views/action.php:31
-#: includes/Post_Types.php:35
+#: includes/Post_Types.php:34
 msgid "Edit"
 msgstr ""
 
@@ -1579,7 +1572,7 @@ msgstr ""
 
 #: admin/views/meta-box-save.php:60
 #: includes/Actions/Change_Workflow_Status.php:28
-#: includes/Post_Types.php:75
+#: includes/Post_Types.php:70
 msgid "Disabled"
 msgstr ""
 
@@ -1967,13 +1960,13 @@ msgstr ""
 msgid "Welcome to AutomateWoo"
 msgstr ""
 
-#: admin/WCAdminConnectPages.php:98
-#: includes/Post_Types.php:34
+#: admin/WCAdminConnectPages.php:83
+#: includes/Post_Types.php:33
 msgid "Add New Workflow"
 msgstr ""
 
-#: admin/WCAdminConnectPages.php:108
-#: includes/Post_Types.php:36
+#: admin/WCAdminConnectPages.php:93
+#: includes/Post_Types.php:35
 msgid "Edit Workflow"
 msgstr ""
 
@@ -3794,117 +3787,117 @@ msgstr ""
 msgid " (Workflow ID: <a href=\"%1$s\">%2$s</a>)"
 msgstr ""
 
-#: includes/Post_Types.php:32
+#: includes/Post_Types.php:31
 msgctxt "Admin menu name"
 msgid "Workflows"
 msgstr ""
 
-#: includes/Post_Types.php:33
+#: includes/Post_Types.php:32
 msgid "Add Workflow"
 msgstr ""
 
-#: includes/Post_Types.php:37
+#: includes/Post_Types.php:36
 msgid "New Workflow"
 msgstr ""
 
+#: includes/Post_Types.php:37
 #: includes/Post_Types.php:38
-#: includes/Post_Types.php:39
 msgid "View Workflow"
 msgstr ""
 
-#: includes/Post_Types.php:40
+#: includes/Post_Types.php:39
 msgid "Search Workflows"
 msgstr ""
 
-#: includes/Post_Types.php:41
+#: includes/Post_Types.php:40
 msgid "No Workflows found"
 msgstr ""
 
-#: includes/Post_Types.php:42
+#: includes/Post_Types.php:41
 msgid "No Workflows found in trash"
 msgstr ""
 
-#: includes/Post_Types.php:80
+#: includes/Post_Types.php:75
 msgid "Disabled <span class=\"count\">(%s)</span>"
 msgid_plural "Disabled <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: placeholder is previous workflow title
-#: includes/Post_Types.php:95
-#: includes/Post_Types.php:98
-#: includes/Post_Types.php:101
+#: includes/Post_Types.php:90
+#: includes/Post_Types.php:93
+#: includes/Post_Types.php:96
 msgid "Workflow updated."
 msgstr ""
 
-#: includes/Post_Types.php:96
+#: includes/Post_Types.php:91
 msgid "Custom field updated."
 msgstr ""
 
-#: includes/Post_Types.php:97
+#: includes/Post_Types.php:92
 msgid "Custom field deleted."
 msgstr ""
 
 #. translators: placeholder is previous workflow title
-#: includes/Post_Types.php:100
+#: includes/Post_Types.php:95
 msgctxt "used in workflow updated messages"
 msgid "Workflow restored to revision from %s"
 msgstr ""
 
-#: includes/Post_Types.php:102
+#: includes/Post_Types.php:97
 msgid "Workflow saved."
 msgstr ""
 
-#: includes/Post_Types.php:103
+#: includes/Post_Types.php:98
 msgid "Workflow submitted."
 msgstr ""
 
 #. translators: php date string, see http://php.net/date
-#: includes/Post_Types.php:105
+#: includes/Post_Types.php:100
 msgid "Workflow scheduled for: %1$s."
 msgstr ""
 
 #. translators: php date string, see http://php.net/date
-#: includes/Post_Types.php:105
+#: includes/Post_Types.php:100
 msgctxt "used in \"Workflow scheduled for <date>\""
 msgid "M j, Y @ G:i"
 msgstr ""
 
 #. translators: php date string, see http://php.net/date
-#: includes/Post_Types.php:106
+#: includes/Post_Types.php:101
 msgid "Workflow draft updated."
 msgstr ""
 
 #. translators: %s: workflow count
-#: includes/Post_Types.php:122
+#: includes/Post_Types.php:117
 msgid "%s workflow updated."
 msgid_plural "%s workflows updated."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: workflow count
-#: includes/Post_Types.php:124
+#: includes/Post_Types.php:119
 msgid "%s workflow not updated, somebody is editing it."
 msgid_plural "%s workflows not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: workflow count
-#: includes/Post_Types.php:126
+#: includes/Post_Types.php:121
 msgid "%s workflow permanently deleted."
 msgid_plural "%s workflows permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: workflow count
-#: includes/Post_Types.php:128
+#: includes/Post_Types.php:123
 msgid "%s workflow moved to the Trash."
 msgid_plural "%s workflows moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: workflow count
-#: includes/Post_Types.php:130
+#: includes/Post_Types.php:125
 msgid "%s workflow restored from the Trash."
 msgid_plural "%s workflows restored from the Trash."
 msgstr[0] ""

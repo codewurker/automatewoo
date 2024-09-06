@@ -22,21 +22,6 @@ class WCAdminConnectPages {
 	const BREADCRUMB_ROOT = 'automatewoo-dashboard';
 
 	/**
-	 * Display the page in WooCommerce Admin nav menu, and show WooCommerce Admin bar, breadcrumbs, etc. on the page
-	 */
-	const PAGE_DISPLAY_FULL = 'full';
-
-	/**
-	 * Hide the page in WC admin nav menu but still show WooCommerce Admin bar, breadcrumbs, etc. on the page
-	 */
-	const PAGE_DISPLAY_HIDDEN = 'hidden';
-
-	/**
-	 * Hide the page in WC admin nav menu and do not display WooCommerce Admin bar, breadcrumbs, etc. on the page
-	 */
-	const PAGE_DISPLAY_STANDALONE = 'standalone';
-
-	/**
 	 * Initialize the class and add hook callbacks.
 	 */
 	public function init() {

@@ -1,5 +1,9 @@
 *** AutomateWoo Changelog ***
 
+2024-09-05 - version 6.1.0
+* Break - Remove WooCommerce Navigation integration.
+* Tweak - WC 9.3.0 compatibility.
+
 2024-08-28 - version 6.0.33
 * Bump min WC version to 7.9, reuse upstreamed classes.
 
